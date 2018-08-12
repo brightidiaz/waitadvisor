@@ -8,23 +8,16 @@
 
 import UIKit
 
-enum state {
+enum ViewState {
     case started
     case stopped
     case responseNeeded
 }
 
 class MainViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    /*
-     View   - Handles tap detection, has a callback for when state changed
-            - Handles view appearance on state change
-     
-     */
-    
     
 }

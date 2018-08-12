@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D90184521205131007BFCBF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90184421205131007BFCBF /* UIViewExtension.swift */; };
 		0DF2FE1A2120371C00CC3457 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE192120371C00CC3457 /* AppDelegate.swift */; };
 		0DF2FE1C2120371C00CC3457 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE1B2120371C00CC3457 /* MainViewController.swift */; };
 		0DF2FE1F2120371C00CC3457 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF2FE1D2120371C00CC3457 /* Main.storyboard */; };
 		0DF2FE212120371D00CC3457 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DF2FE202120371D00CC3457 /* Assets.xcassets */; };
 		0DF2FE242120371D00CC3457 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF2FE222120371D00CC3457 /* LaunchScreen.storyboard */; };
 		0DF2FE2F2120371D00CC3457 /* WaitAdvisorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE2E2120371D00CC3457 /* WaitAdvisorTests.swift */; };
+		0DF2FE3E21203ABA00CC3457 /* StateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF2FE3D21203ABA00CC3457 /* StateView.xib */; };
+		0DF2FE4021203BBC00CC3457 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE3F21203BBC00CC3457 /* StateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D90184421205131007BFCBF /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		0DF2FE162120371C00CC3457 /* WaitAdvisor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaitAdvisor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF2FE192120371C00CC3457 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DF2FE1B2120371C00CC3457 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +40,8 @@
 		0DF2FE2A2120371D00CC3457 /* WaitAdvisorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaitAdvisorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF2FE2E2120371D00CC3457 /* WaitAdvisorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitAdvisorTests.swift; sourceTree = "<group>"; };
 		0DF2FE302120371D00CC3457 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DF2FE3D21203ABA00CC3457 /* StateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StateView.xib; sourceTree = "<group>"; };
+		0DF2FE3F21203BBC00CC3457 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +83,11 @@
 		0DF2FE182120371C00CC3457 /* WaitAdvisor */ = {
 			isa = PBXGroup;
 			children = (
-				0DF2FE192120371C00CC3457 /* AppDelegate.swift */,
-				0DF2FE1B2120371C00CC3457 /* MainViewController.swift */,
-				0DF2FE1D2120371C00CC3457 /* Main.storyboard */,
+				0DF2FE3921203A4000CC3457 /* Views */,
+				0DF2FE3A21203A4D00CC3457 /* Controllers */,
+				0DF2FE3B21203A6200CC3457 /* Storyboards */,
+				0DF2FE3C21203A7900CC3457 /* Helpers */,
 				0DF2FE202120371D00CC3457 /* Assets.xcassets */,
-				0DF2FE222120371D00CC3457 /* LaunchScreen.storyboard */,
-				0DF2FE252120371D00CC3457 /* Info.plist */,
 			);
 			path = WaitAdvisor;
 			sourceTree = "<group>";
@@ -94,6 +99,42 @@
 				0DF2FE302120371D00CC3457 /* Info.plist */,
 			);
 			path = WaitAdvisorTests;
+			sourceTree = "<group>";
+		};
+		0DF2FE3921203A4000CC3457 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0DF2FE3D21203ABA00CC3457 /* StateView.xib */,
+				0DF2FE3F21203BBC00CC3457 /* StateView.swift */,
+				0D90184421205131007BFCBF /* UIViewExtension.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0DF2FE3A21203A4D00CC3457 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0DF2FE1B2120371C00CC3457 /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0DF2FE3B21203A6200CC3457 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0DF2FE222120371D00CC3457 /* LaunchScreen.storyboard */,
+				0DF2FE1D2120371C00CC3457 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		0DF2FE3C21203A7900CC3457 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0DF2FE192120371C00CC3457 /* AppDelegate.swift */,
+				0DF2FE252120371D00CC3457 /* Info.plist */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +220,7 @@
 			files = (
 				0DF2FE242120371D00CC3457 /* LaunchScreen.storyboard in Resources */,
 				0DF2FE212120371D00CC3457 /* Assets.xcassets in Resources */,
+				0DF2FE3E21203ABA00CC3457 /* StateView.xib in Resources */,
 				0DF2FE1F2120371C00CC3457 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +239,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DF2FE4021203BBC00CC3457 /* StateView.swift in Sources */,
 				0DF2FE1C2120371C00CC3457 /* MainViewController.swift in Sources */,
+				0D90184521205131007BFCBF /* UIViewExtension.swift in Sources */,
 				0DF2FE1A2120371C00CC3457 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,7 +404,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = WaitAdvisor/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/WaitAdvisor/Helpers/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -379,7 +423,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = WaitAdvisor/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/WaitAdvisor/Helpers/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
