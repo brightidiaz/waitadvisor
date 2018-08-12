@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D90184521205131007BFCBF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90184421205131007BFCBF /* UIViewExtension.swift */; };
+		0D901849212057E6007BFCBF /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D901848212057E6007BFCBF /* StateModel.swift */; };
 		0DF2FE1A2120371C00CC3457 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE192120371C00CC3457 /* AppDelegate.swift */; };
 		0DF2FE1C2120371C00CC3457 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE1B2120371C00CC3457 /* MainViewController.swift */; };
 		0DF2FE1F2120371C00CC3457 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF2FE1D2120371C00CC3457 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		0D90184421205131007BFCBF /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		0D901848212057E6007BFCBF /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		0DF2FE162120371C00CC3457 /* WaitAdvisor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaitAdvisor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF2FE192120371C00CC3457 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DF2FE1B2120371C00CC3457 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D901847212057D3007BFCBF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0D901848212057E6007BFCBF /* StateModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0DF2FE0D2120371C00CC3457 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +93,7 @@
 		0DF2FE182120371C00CC3457 /* WaitAdvisor */ = {
 			isa = PBXGroup;
 			children = (
+				0D901847212057D3007BFCBF /* Model */,
 				0DF2FE3921203A4000CC3457 /* Views */,
 				0DF2FE3A21203A4D00CC3457 /* Controllers */,
 				0DF2FE3B21203A6200CC3457 /* Storyboards */,
@@ -243,6 +254,7 @@
 				0DF2FE1C2120371C00CC3457 /* MainViewController.swift in Sources */,
 				0D90184521205131007BFCBF /* UIViewExtension.swift in Sources */,
 				0DF2FE1A2120371C00CC3457 /* AppDelegate.swift in Sources */,
+				0D901849212057E6007BFCBF /* StateModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
