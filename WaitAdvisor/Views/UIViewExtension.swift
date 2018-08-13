@@ -6,7 +6,6 @@
 //  Copyright © 2018 John Phillip Lee. All rights reserved.
 //
 
-
 // This is an extension that loads the xib file and allows us to place it within a superview
 import UIKit
 

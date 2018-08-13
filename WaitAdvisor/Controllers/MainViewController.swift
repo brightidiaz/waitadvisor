@@ -9,12 +9,32 @@
 // The main screen. The app's main logic is handled here
 import UIKit
 
+/*
+ TODO
+ AppID and UserID
+ Location Manager
+ API Manager
+ */
+
+/* Location and time encapsulated */
+struct DataPiece {
+    var location: String //Change to CLLocation
+    var time: Date
+}
+
+extension DataPiece {
+    init() {
+        location = "Test"
+        time = Date()
+    }
+}
+
 class MainViewController: UIViewController {
-    let model = StateModel(value: .stopped)
-    let stateView = StateView(frame: .zero)
-    var viewModel: StateViewModel?
-    var observer: NSObjectProtocol?
-    var timer = Timer()
+    private let model = StateModel(value: .stopped)
+    private let stateView = StateView(frame: .zero)
+    private var viewModel: StateViewModel?
+    private var data1, data2, data3: DataPiece?
+    private var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +52,30 @@ class MainViewController: UIViewController {
         view = stateView
     }
     
+    private func resetData() {
+        data1 = DataPiece()
+        data2 = nil
+        data3 = nil
+    }
+    
     private func performActionFor(state: State) {
         print("Changed state to \(state)")
+        /*
+         if state = started
+            get initial time and location
+            schedule timer
+         if state = stopped
+            invalidate timer
+         if responseNeeded
+            pause timer?
+         */
     }
+    
+    /* On Timer Tick */
+    /*
+     get current time and location
+     
+     */
 }
 
 extension MainViewController: StateViewModelDelegate {

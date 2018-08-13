@@ -8,12 +8,14 @@
 
 import Foundation
 
+/* The different states the app could be in */
 enum State {
     case started
     case stopped
     case responseNeeded
 }
 
+/* Handles the state changes and notifies interested parties */
 class StateModel {
     static let stateDidChange = Notification.Name("stateDidChange")
     static let stateKey = "state"
