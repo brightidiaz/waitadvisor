@@ -43,12 +43,14 @@ private struct StateUISettings {
     var switchIsOn: Bool
     var switchText: String
     var messageText: String
+    var isSwitchVisible: Bool
 }
 
 class StateView: UIView {
     @IBOutlet weak private var waitSwitch: UISwitch!
     @IBOutlet weak private var messageLabel: UILabel!
     @IBOutlet weak private var switchLabel: UILabel!
+    @IBOutlet weak private var switchContainer: UIView!
     
     var model: StateViewModel? {
         didSet {
@@ -57,13 +59,17 @@ class StateView: UIView {
                 case .started:
                     self?.applyUI(StateUISettings(switchIsOn: true,
                                                   switchText: "Wait Advisor is ON",
-                                                  messageText: "You have activated the Wait Advisor. Please don't forget to turn this OFF as soon as your wait is over."))
+                                                  messageText: "You have activated the Wait Advisor. Please don't forget to turn this OFF as soon as your wait is over.", isSwitchVisible: true))
                 case .stopped:
                     self?.applyUI(StateUISettings(switchIsOn: false,
                                                   switchText: "Wait Advisor is OFF",
-                                                  messageText: "If you are currently waiting in a queue or are parked waiting for your cargo to be loaded or unloaded, please turn the switch on."))
+                                                  messageText: "If you are currently waiting in a queue or are parked waiting for your cargo to be loaded or unloaded, please turn the switch on.", isSwitchVisible: true))
                 case .responseNeeded:
                     return
+                case .locationError:
+                    self?.applyUI(StateUISettings(switchIsOn: false,
+                                                  switchText: "Wait Advisor is OFF",
+                                                  messageText: "Please enable location services and make sure that Wait Advisor has permission to get your location.", isSwitchVisible: false))
                 }
             }
         }
@@ -114,5 +120,6 @@ fileprivate extension StateView {
         waitSwitch.isOn = setting.switchIsOn
         switchLabel.text = setting.switchText
         messageLabel.text = setting.messageText
+        switchContainer.isHidden = !setting.isSwitchVisible
     }
 }

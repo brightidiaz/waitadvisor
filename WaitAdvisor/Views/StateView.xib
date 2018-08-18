@@ -14,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StateView" customModule="WaitAdvisor" customModuleProvider="target">
             <connections>
                 <outlet property="messageLabel" destination="Sfk-W3-Vvb" id="PgA-PG-F6P"/>
+                <outlet property="switchContainer" destination="uZm-gd-CHa" id="Bur-YZ-ME6"/>
                 <outlet property="switchLabel" destination="yWY-bi-L0W" id="WbT-Cu-eF0"/>
                 <outlet property="waitSwitch" destination="SxA-44-rrN" id="9XX-5k-l9O"/>
             </connections>

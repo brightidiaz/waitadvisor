@@ -8,6 +8,7 @@
 
 // The main screen. The app's main logic is handled here
 import UIKit
+import CoreLocation
 
 /*
  TODO
@@ -17,13 +18,13 @@ import UIKit
 
 /* Location and time encapsulated */
 struct DataPiece {
-    var location: String //Change to CLLocation
+    var location: CLLocation
     var time: Date
 }
 
 extension DataPiece {
     init() {
-        location = "Test"
+        location = CLLocation(latitude: 0, longitude: 0)
         time = Date()
     }
 }
@@ -31,20 +32,35 @@ extension DataPiece {
 class MainViewController: UIViewController {
     private let model = StateModel(value: .stopped)
     private let stateView = StateView(frame: .zero)
+    private var locationManager: LocationManager
     private var viewModel: StateViewModel?
     private var data1, data2, data3: DataPiece?
     private var timer = Timer()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        locationManager = LocationManager(successCallback: nil)
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        locationManager = LocationManager(successCallback: nil)
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         viewModel = StateViewModel(model: model)
         stateView.model = viewModel
         viewModel?.delegate = self
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {[weak self] (timer) in
-            let newState: State = .stopped
-            self?.stateView.model?.model.value = newState
-            self?.performActionFor(state: newState)
+        locationManager.errorCallback = {[weak self] (errorString) in
+            self?.stateView.model?.model.value = .locationError
         }
+//        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {[weak self] (timer) in
+//            let newState: State = .stopped
+//            self?.stateView.model?.model.value = newState
+//            self?.performActionFor(state: newState)
+//        }
     }
     
     override func loadView() {
@@ -58,16 +74,17 @@ class MainViewController: UIViewController {
     }
     
     private func performActionFor(state: State) {
-        
-        /*
-         if state = started
-            get initial time and location
-            schedule timer
-         if state = stopped
-            invalidate timer
-         if responseNeeded
-            pause timer?
-         */
+        switch state {
+        case .started:
+            performStartedOperation()
+        case .stopped:
+            performStoppedOperation()
+        case .responseNeeded:
+            performResponseNeededOperation()
+        case .locationError:
+            timer.invalidate()
+            print("Error")
+        }
     }
     
     /* On Timer Tick */
@@ -76,6 +93,24 @@ class MainViewController: UIViewController {
      
      */
     
+    private func performStartedOperation() {
+        //        get initial time and location
+        //        schedule timer
+        locationManager.successCallback = { (location) in
+            print("Location: \(location)")
+        }
+        locationManager.startReceivingLocationChanges()
+    }
+    
+    private func performStoppedOperation() {
+        //         invalidate timer
+
+    }
+    
+    private func performResponseNeededOperation() {
+        
+    }
+
     private func showLocationView() {
         let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
         locationChangeVC.modalPresentationStyle = .overCurrentContext

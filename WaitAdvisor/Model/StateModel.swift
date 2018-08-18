@@ -13,6 +13,7 @@ enum State {
     case started
     case stopped
     case responseNeeded
+    case locationError
 }
 
 /* Handles the state changes and notifies interested parties */

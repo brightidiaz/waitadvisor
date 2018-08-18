@@ -10,23 +10,32 @@ import Foundation
 import CoreLocation
 
 class LocationManager: NSObject {
-    var coreLocationManager: CLLocationManager!
-    override init() {
+    private var coreLocationManager: CLLocationManager!
+    var errorCallback: ((String)->())?
+    var successCallback: ((CLLocation)->())?
+    
+    private override init() {
         super.init()
         coreLocationManager = CLLocationManager()
         coreLocationManager.delegate = self
         coreLocationManager.requestWhenInUseAuthorization()
     }
     
-    private func startReceivingLocationChanges() {
+    convenience init(successCallback: ((CLLocation)->())?, errorCallback: ((String)->())? = nil) {
+        self.init()
+        self.successCallback = successCallback
+        self.errorCallback = errorCallback
+    }
+    
+    func startReceivingLocationChanges() {
         let authorizationStatus = CLLocationManager.authorizationStatus()
         if authorizationStatus != .authorizedWhenInUse {
-            //Not authorized
-            print("Not Authorized")
+            errorCallback?("Not Authorized")
             return
         }
         
         if !CLLocationManager.locationServicesEnabled() {
+            errorCallback?("Location Services not enabled")
             return
         }
         
@@ -41,6 +50,7 @@ extension LocationManager: CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             startReceivingLocationChanges()
         } else {
+            errorCallback?("Not Authorized")
         }
     }
     
@@ -48,17 +58,17 @@ extension LocationManager: CLLocationManagerDelegate {
         guard let lastLocation = locations.last else {
             return
         }
-        print("Last Location = \(lastLocation)")
+        successCallback?(lastLocation)
         coreLocationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if let error = error as? CLError, error.code == .denied {
-            print("Did Fail - Not Authorized")
+            errorCallback?("Not Authorized")
             manager.stopUpdatingLocation()
             return
         }
-        print("Did Fail")
+        errorCallback?("Failed")
     }
 
 }
