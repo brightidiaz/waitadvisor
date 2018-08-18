@@ -12,7 +12,6 @@ import UIKit
 /*
  TODO
  AppID and UserID
- Location Manager
  API Manager
  */
 
@@ -59,7 +58,7 @@ class MainViewController: UIViewController {
     }
     
     private func performActionFor(state: State) {
-        print("Changed state to \(state)")
+        
         /*
          if state = started
             get initial time and location
@@ -76,10 +75,29 @@ class MainViewController: UIViewController {
      get current time and location
      
      */
+    
+    private func showLocationView() {
+        let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
+        locationChangeVC.modalPresentationStyle = .overCurrentContext
+        locationChangeVC.delegate = self
+        present(locationChangeVC, animated: false, completion: nil)
+    }
 }
 
 extension MainViewController: StateViewModelDelegate {
     func stateViewModel(_ stateViewModel: StateViewModel, didChangeStateTo state: State) {
         performActionFor(state: state)
     }
+}
+
+extension MainViewController: LocationChangeViewControllerDelegate {
+    func locationChangeControllerDidTapStillWaiting(_ locationChangeController: LocationChangeViewController) {
+        print("Tapped Still Waiting")
+    }
+    
+    func locationChangeControllerDidTapNowMoving(_ locationChangeController: LocationChangeViewController) {
+        print("Tapped Now Working")
+    }
+    
+    
 }

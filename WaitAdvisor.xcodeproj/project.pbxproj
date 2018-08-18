@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0D90184521205131007BFCBF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90184421205131007BFCBF /* UIViewExtension.swift */; };
 		0D901849212057E6007BFCBF /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D901848212057E6007BFCBF /* StateModel.swift */; };
+		0DEFEB7621283A6C00A39DF2 /* LocationChangeDetectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEFEB7521283A6C00A39DF2 /* LocationChangeDetectedView.swift */; };
+		0DEFEB7921283F5100A39DF2 /* LocationChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEFEB7721283F5100A39DF2 /* LocationChangeViewController.swift */; };
+		0DEFEB7A21283F5100A39DF2 /* LocationChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DEFEB7821283F5100A39DF2 /* LocationChangeViewController.xib */; };
 		0DF2FE1A2120371C00CC3457 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE192120371C00CC3457 /* AppDelegate.swift */; };
 		0DF2FE1C2120371C00CC3457 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE1B2120371C00CC3457 /* MainViewController.swift */; };
 		0DF2FE1F2120371C00CC3457 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF2FE1D2120371C00CC3457 /* Main.storyboard */; };
@@ -36,6 +39,9 @@
 /* Begin PBXFileReference section */
 		0D90184421205131007BFCBF /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		0D901848212057E6007BFCBF /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
+		0DEFEB7521283A6C00A39DF2 /* LocationChangeDetectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChangeDetectedView.swift; sourceTree = "<group>"; };
+		0DEFEB7721283F5100A39DF2 /* LocationChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChangeViewController.swift; sourceTree = "<group>"; };
+		0DEFEB7821283F5100A39DF2 /* LocationChangeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationChangeViewController.xib; sourceTree = "<group>"; };
 		0DF2FE162120371C00CC3457 /* WaitAdvisor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaitAdvisor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF2FE192120371C00CC3457 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DF2FE1B2120371C00CC3457 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +133,7 @@
 				0DF2FE3F21203BBC00CC3457 /* StateView.swift */,
 				0D90184421205131007BFCBF /* UIViewExtension.swift */,
 				0DF5D6FC2128052200EAA77F /* LocationChangeDetectedView.xib */,
+				0DEFEB7521283A6C00A39DF2 /* LocationChangeDetectedView.swift */,
 				0DF5D6FE2128065600EAA77F /* JLButton.xib */,
 				0DF5D700212806C600EAA77F /* JLButton.swift */,
 			);
@@ -137,6 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				0DF2FE1B2120371C00CC3457 /* MainViewController.swift */,
+				0DEFEB7721283F5100A39DF2 /* LocationChangeViewController.swift */,
+				0DEFEB7821283F5100A39DF2 /* LocationChangeViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -154,8 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				0DF2FE192120371C00CC3457 /* AppDelegate.swift */,
-				0DF2FE252120371D00CC3457 /* Info.plist */,
 				0DF5D6FA2127DAD800EAA77F /* LocationManager.swift */,
+				0DF2FE252120371D00CC3457 /* Info.plist */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -247,6 +256,7 @@
 				0DF5D6FF2128065600EAA77F /* JLButton.xib in Resources */,
 				0DF2FE3E21203ABA00CC3457 /* StateView.xib in Resources */,
 				0DF2FE1F2120371C00CC3457 /* Main.storyboard in Resources */,
+				0DEFEB7A21283F5100A39DF2 /* LocationChangeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,11 +274,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DEFEB7921283F5100A39DF2 /* LocationChangeViewController.swift in Sources */,
 				0DF5D701212806C600EAA77F /* JLButton.swift in Sources */,
 				0DF2FE4021203BBC00CC3457 /* StateView.swift in Sources */,
 				0DF2FE1C2120371C00CC3457 /* MainViewController.swift in Sources */,
 				0DF5D6FB2127DAD800EAA77F /* LocationManager.swift in Sources */,
 				0D90184521205131007BFCBF /* UIViewExtension.swift in Sources */,
+				0DEFEB7621283A6C00A39DF2 /* LocationChangeDetectedView.swift in Sources */,
 				0DF2FE1A2120371C00CC3457 /* AppDelegate.swift in Sources */,
 				0D901849212057E6007BFCBF /* StateModel.swift in Sources */,
 			);
