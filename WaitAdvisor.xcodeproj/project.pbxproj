@@ -18,6 +18,9 @@
 		0DF2FE3E21203ABA00CC3457 /* StateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF2FE3D21203ABA00CC3457 /* StateView.xib */; };
 		0DF2FE4021203BBC00CC3457 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE3F21203BBC00CC3457 /* StateView.swift */; };
 		0DF5D6FB2127DAD800EAA77F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF5D6FA2127DAD800EAA77F /* LocationManager.swift */; };
+		0DF5D6FD2128052200EAA77F /* LocationChangeDetectedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF5D6FC2128052200EAA77F /* LocationChangeDetectedView.xib */; };
+		0DF5D6FF2128065600EAA77F /* JLButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF5D6FE2128065600EAA77F /* JLButton.xib */; };
+		0DF5D701212806C600EAA77F /* JLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF5D700212806C600EAA77F /* JLButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,9 @@
 		0DF2FE3D21203ABA00CC3457 /* StateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StateView.xib; sourceTree = "<group>"; };
 		0DF2FE3F21203BBC00CC3457 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 		0DF5D6FA2127DAD800EAA77F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		0DF5D6FC2128052200EAA77F /* LocationChangeDetectedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationChangeDetectedView.xib; sourceTree = "<group>"; };
+		0DF5D6FE2128065600EAA77F /* JLButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JLButton.xib; sourceTree = "<group>"; };
+		0DF5D700212806C600EAA77F /* JLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +126,9 @@
 				0DF2FE3D21203ABA00CC3457 /* StateView.xib */,
 				0DF2FE3F21203BBC00CC3457 /* StateView.swift */,
 				0D90184421205131007BFCBF /* UIViewExtension.swift */,
+				0DF5D6FC2128052200EAA77F /* LocationChangeDetectedView.xib */,
+				0DF5D6FE2128065600EAA77F /* JLButton.xib */,
+				0DF5D700212806C600EAA77F /* JLButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,6 +243,8 @@
 			files = (
 				0DF2FE242120371D00CC3457 /* LaunchScreen.storyboard in Resources */,
 				0DF2FE212120371D00CC3457 /* Assets.xcassets in Resources */,
+				0DF5D6FD2128052200EAA77F /* LocationChangeDetectedView.xib in Resources */,
+				0DF5D6FF2128065600EAA77F /* JLButton.xib in Resources */,
 				0DF2FE3E21203ABA00CC3457 /* StateView.xib in Resources */,
 				0DF2FE1F2120371C00CC3457 /* Main.storyboard in Resources */,
 			);
@@ -253,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DF5D701212806C600EAA77F /* JLButton.swift in Sources */,
 				0DF2FE4021203BBC00CC3457 /* StateView.swift in Sources */,
 				0DF2FE1C2120371C00CC3457 /* MainViewController.swift in Sources */,
 				0DF5D6FB2127DAD800EAA77F /* LocationManager.swift in Sources */,
