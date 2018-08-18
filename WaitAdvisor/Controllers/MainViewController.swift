@@ -87,24 +87,34 @@ class MainViewController: UIViewController {
         }
     }
     
-    /* On Timer Tick */
-    /*
-     get current time and location
-     
-     */
-    
     private func performStartedOperation() {
-        //        get initial time and location
-        //        schedule timer
-        locationManager.successCallback = { (location) in
-            print("Location: \(location)")
+        locationManager.successCallback = {[weak self] (location) in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.data1 = DataPiece(location: location, time: Date())
+            print("Data 1 = \(weakSelf.data1)")
+            weakSelf.timer = Timer.scheduledTimer(timeInterval: 5, target: weakSelf, selector: #selector(weakSelf.timerTick(_:)), userInfo: nil, repeats: true)
+        }
+        locationManager.startReceivingLocationChanges()
+    }
+    
+    @objc func timerTick(_ timer: Timer) {
+        locationManager.successCallback = {[weak self] (location) in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.data2 = DataPiece(location: location, time: Date())
+            print()
+            print("Data 1 = \(weakSelf.data1)")
+            print("Data 2 = \(weakSelf.data2)")
         }
         locationManager.startReceivingLocationChanges()
     }
     
     private func performStoppedOperation() {
-        //         invalidate timer
-
+        print("Stopped Timer")
+        timer.invalidate()
     }
     
     private func performResponseNeededOperation() {
