@@ -17,6 +17,7 @@
 		0DF2FE2F2120371D00CC3457 /* WaitAdvisorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE2E2120371D00CC3457 /* WaitAdvisorTests.swift */; };
 		0DF2FE3E21203ABA00CC3457 /* StateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF2FE3D21203ABA00CC3457 /* StateView.xib */; };
 		0DF2FE4021203BBC00CC3457 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF2FE3F21203BBC00CC3457 /* StateView.swift */; };
+		0DF5D6FB2127DAD800EAA77F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF5D6FA2127DAD800EAA77F /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		0DF2FE302120371D00CC3457 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DF2FE3D21203ABA00CC3457 /* StateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StateView.xib; sourceTree = "<group>"; };
 		0DF2FE3F21203BBC00CC3457 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
+		0DF5D6FA2127DAD800EAA77F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			children = (
 				0DF2FE192120371C00CC3457 /* AppDelegate.swift */,
 				0DF2FE252120371D00CC3457 /* Info.plist */,
+				0DF5D6FA2127DAD800EAA77F /* LocationManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			files = (
 				0DF2FE4021203BBC00CC3457 /* StateView.swift in Sources */,
 				0DF2FE1C2120371C00CC3457 /* MainViewController.swift in Sources */,
+				0DF5D6FB2127DAD800EAA77F /* LocationManager.swift in Sources */,
 				0D90184521205131007BFCBF /* UIViewExtension.swift in Sources */,
 				0DF2FE1A2120371C00CC3457 /* AppDelegate.swift in Sources */,
 				0D901849212057E6007BFCBF /* StateModel.swift in Sources */,
