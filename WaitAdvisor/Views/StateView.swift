@@ -61,7 +61,7 @@ fileprivate extension StateView {
     func setupStructure() {
         let viewFromNib = viewFromOwnedNib()
         addSubviewAndFill(viewFromNib)
-        setupGestureRecognizer()
+//        setupGestureRecognizer()
     }
     
     func setupGestureRecognizer() {
