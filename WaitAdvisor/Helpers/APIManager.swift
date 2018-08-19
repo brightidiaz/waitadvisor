@@ -21,9 +21,21 @@ struct APIObject {
 
 class APIManager {
     static let shared = APIManager()
+    private let NetworkQueue = OperationQueue()
+    private let reachability = Reachability()
     
     func post(apiObject: APIObject) {
         //if no connection, save to user defaults
-        UserDefaultsManager.shared.saveAPIObject(userId: apiObject.userID)
+//        if reachability?.connection == .none {
+//            print("No connection")
+//        } else {
+//            print("With connection")
+//        }
+        
+        
+        let operation = PostOperation(apiObject: apiObject)
+        NetworkQueue.addOperation(operation)
+        
+//        UserDefaultsManager.shared.saveAPIObject(userId: apiObject.userID)
     }
 }

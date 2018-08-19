@@ -13,7 +13,6 @@ import CoreLocation
 /*
  TODO
  AppID and UserID
- API Manager
  */
 
 /* Location and time encapsulated */
@@ -59,7 +58,8 @@ class MainViewController: UIViewController {
         stateView.model = viewModel
         viewModel?.delegate = self
         locationManager.errorCallback = {[weak self] (errorString) in
-            self?.changeStateTo(.locationError)
+            self?.changeUIStateTo(.locationError)
+            self?.performActionFor(state: .locationError)
         }
         resetData()
     }
@@ -80,10 +80,41 @@ class MainViewController: UIViewController {
         case .started:
             performStartedOperation()
         case .stopped:
+            stopTimer()
             performStoppedOperation()
         case .locationError:
             stopTimer()
         }
+    }
+    
+    private func manuallyStopped() {
+        locationManager.successCallback = {[weak self] (location) in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.data3 = DataPiece(location: location, time: Date())
+            
+            guard let firstData = weakSelf.data1, let secondData = weakSelf.data3 else {
+                return
+            }
+            
+            if secondData.time.timeIntervalSince(firstData.time) < weakSelf.TIME_THRESHOLD{
+                weakSelf.resetData()
+            } else {
+                
+                guard let weakSelf = self, let userData3 = weakSelf.data3, let userData1 = weakSelf.data1 else {
+                    print("Data is NIL!")
+                    return
+                }
+                let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
+                                          longitude: userData3.location.coordinate.longitude,
+                                          time1: userData3.time,
+                                          time2: userData1.time,
+                                          userID: "My user ID")
+                weakSelf.sendData(apiObject)
+            }
+        }
+        locationManager.startReceivingLocationChanges()
     }
     
     private func performStartedOperation() {
@@ -138,12 +169,11 @@ class MainViewController: UIViewController {
     }
     
     private func performStoppedOperation() {
-        stopTimer()
+        manuallyStopped()
     }
     
-    private func changeStateTo(_ state: State) {
+    private func changeUIStateTo(_ state: State) {
         stateView.model?.model.value = state
-        performActionFor(state: state)
     }
     
     private func showLocationView() {
@@ -164,7 +194,6 @@ extension MainViewController: StateViewModelDelegate {
 
 extension MainViewController: LocationChangeViewControllerDelegate {
     func locationChangeControllerTimerDidElapse(_ locationChangeController: LocationChangeViewController) {
-        changeStateTo(.stopped)
         guard let userData2 = data2, let userData1 = data1 else {
             print("Data is NIL!")
             return
@@ -175,6 +204,7 @@ extension MainViewController: LocationChangeViewControllerDelegate {
                                   time2: userData1.time,
                                   userID: "My user ID 2")
         sendData(apiObject)
+        changeUIStateTo(.stopped)
     }
     
     func locationChangeControllerDidTapStillWaiting(_ locationChangeController: LocationChangeViewController) {
@@ -183,34 +213,17 @@ extension MainViewController: LocationChangeViewControllerDelegate {
     }
     
     func locationChangeControllerDidTapNowMoving(_ locationChangeController: LocationChangeViewController) {
-        locationManager.successCallback = {[weak self] (location) in
-            guard let weakSelf = self else {
-                return
-            }
-            weakSelf.data3 = DataPiece(location: location, time: Date())
-            
-            guard let firstData = weakSelf.data1, let secondData = weakSelf.data3 else {
-                return
-            }
-            
-            if secondData.time.timeIntervalSince(firstData.time) < weakSelf.TIME_THRESHOLD{
-                weakSelf.resetData()
-            } else {
-                
-                guard let weakSelf = self, let userData3 = weakSelf.data3, let userData1 = weakSelf.data1 else {
-                    print("Data is NIL!")
-                    return
-                }
-                let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
-                                          longitude: userData3.location.coordinate.longitude,
-                                          time1: userData3.time,
-                                          time2: userData1.time,
-                                          userID: "My user ID")
-                weakSelf.sendData(apiObject)
-            }
-            weakSelf.changeStateTo(.stopped)
+        guard let userData2 = data2, let userData1 = data1 else {
+            print("Data is NIL!")
+            return
         }
-        locationManager.startReceivingLocationChanges()
+        let apiObject = APIObject(latitude: userData2.location.coordinate.latitude,
+                                  longitude: userData2.location.coordinate.longitude,
+                                  time1: userData2.time,
+                                  time2: userData1.time,
+                                  userID: "My user ID 2")
+        sendData(apiObject)
+        changeUIStateTo(.stopped)
     }
     
 }

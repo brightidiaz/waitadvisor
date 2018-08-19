@@ -15,6 +15,8 @@ struct JLButtonModel {
 
 @IBDesignable
 class JLButton: UIView {
+    private let CORNER_RADIUS: CGFloat = 5.0
+    private let BORDER_WIDTH: CGFloat = 1.0
     
     @IBOutlet weak private var buttonText: UILabel!
     
@@ -50,6 +52,14 @@ fileprivate extension JLButton {
     func setupStructure() {
         let viewFromNib = viewFromOwnedNib()
         addSubviewAndFill(viewFromNib)
+        layer.cornerRadius = CORNER_RADIUS
+        layer.borderWidth = BORDER_WIDTH
+        layer.borderColor = UIColor.gray.cgColor
+        
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOffset = CGSize(width: 3, height: 3)
+        layer.shadowOpacity = 0.7
+        layer.shadowRadius = 3.0
     }
     
 }
