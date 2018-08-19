@@ -10,10 +10,10 @@ import Foundation
 
 class PostOperation: WaitAdvisorOperation {
     var responseObject: ServerResponse?
-    var apiObject: APIObject
+    var apiObjecAsJson: String
     
-    init(apiObject: APIObject) {
-        self.apiObject = apiObject
+    init(apiObjecAsJson: String) {
+        self.apiObjecAsJson = apiObjecAsJson
     }
     
     override func main() {
@@ -24,7 +24,7 @@ class PostOperation: WaitAdvisorOperation {
         
         executing(true)
         
-        print("POST DATA = \(self.apiObject)")
+        print("POST DATA = \(self.apiObjecAsJson)")
         if (!isCancelled) {
             responseObject?.response = "Server Response"
         }

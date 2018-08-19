@@ -11,7 +11,7 @@
 import Foundation
 import CoreLocation
 
-struct APIObject {
+struct APIObject: Codable {
     var latitude: CLLocationDegrees
     var longitude: CLLocationDegrees
     var time1: Date
@@ -25,17 +25,37 @@ class APIManager {
     private let reachability = Reachability()
     
     func post(apiObject: APIObject) {
-        //if no connection, save to user defaults
-//        if reachability?.connection == .none {
-//            print("No connection")
-//        } else {
-//            print("With connection")
-//        }
+        //convert to json
         
-        
-        let operation = PostOperation(apiObject: apiObject)
+        do {
+            let jsonData = try JSONEncoder().encode(apiObject)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            let _ = try JSONDecoder().decode(APIObject.self, from: jsonData)
+            
+            if reachability?.connection == .none {
+                print("No connection - Saving")
+                UserDefaultsManager.shared.saveAPIObject(apiObjectAsJson: jsonString)
+            } else {
+                print("With connection - Sending out")
+                postToServer(json: jsonString)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func postAllIfNetworkAvailable() {
+        if reachability?.connection != .none {
+            let allPending = UserDefaultsManager.shared.getAllPendingData()
+            allPending.forEach { (jsonString) in
+                postToServer(json: jsonString)
+            }
+            UserDefaultsManager.shared.clearOutPendingData()
+        }
+    }
+    
+    private func postToServer(json: String) {
+        let operation = PostOperation(apiObjecAsJson: json)
         NetworkQueue.addOperation(operation)
-        
-//        UserDefaultsManager.shared.saveAPIObject(userId: apiObject.userID)
     }
 }

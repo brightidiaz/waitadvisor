@@ -53,7 +53,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Pending:")
         UserDefaultsManager.shared.printContents()
+        print()
         viewModel = StateViewModel(model: model)
         stateView.model = viewModel
         viewModel?.delegate = self
