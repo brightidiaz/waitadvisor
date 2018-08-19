@@ -45,6 +45,7 @@ class APIManager {
     }
     
     func postAllIfNetworkAvailable() {
+        print("Post All")
         if reachability?.connection != .none {
             let allPending = UserDefaultsManager.shared.getAllPendingData()
             allPending.forEach { (jsonString) in

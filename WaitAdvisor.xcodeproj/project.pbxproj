@@ -173,9 +173,9 @@
 		0DF2FE3C21203A7900CC3457 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0DF2FE252120371D00CC3457 /* Info.plist */,
 				0DF2FE192120371C00CC3457 /* AppDelegate.swift */,
 				0DF5D6FA2127DAD800EAA77F /* LocationManager.swift */,
-				0DF2FE252120371D00CC3457 /* Info.plist */,
 				0DECE6F82129000F00F1E303 /* APIManager.swift */,
 				0DF3C63721292A9A00395320 /* UserDefaultsManager.swift */,
 				0DF3C63E212933CC00395320 /* Reachability.swift */,

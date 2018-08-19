@@ -30,8 +30,8 @@ extension DataPiece {
 
 class MainViewController: UIViewController {
     private let MINIMUM_DISTANCE: CLLocationDistance = 500.0
-    private let TIME_THRESHOLD: TimeInterval = 3 //15 * 60
-    private let TIMER_INTERVAL: TimeInterval = 5
+    private let TIME_THRESHOLD: TimeInterval = 15 * 60
+    private let TIMER_INTERVAL: TimeInterval = 5 * 60
     
     private let model = StateModel(value: .stopped)
     private let stateView = StateView(frame: .zero)
