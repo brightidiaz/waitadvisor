@@ -12,7 +12,6 @@ import Foundation
 enum State {
     case started
     case stopped
-    case responseNeeded
     case locationError
 }
 

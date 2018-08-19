@@ -30,6 +30,10 @@ extension DataPiece {
 }
 
 class MainViewController: UIViewController {
+    private let MINIMUM_DISTANCE: CLLocationDistance = 500.0
+    private let TIME_THRESHOLD: TimeInterval = 3 //15 * 60
+    private let TIMER_INTERVAL: TimeInterval = 5
+    
     private let model = StateModel(value: .stopped)
     private let stateView = StateView(frame: .zero)
     private var locationManager: LocationManager
@@ -54,13 +58,9 @@ class MainViewController: UIViewController {
         stateView.model = viewModel
         viewModel?.delegate = self
         locationManager.errorCallback = {[weak self] (errorString) in
-            self?.stateView.model?.model.value = .locationError
+            self?.changeStateTo(.locationError)
         }
-//        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {[weak self] (timer) in
-//            let newState: State = .stopped
-//            self?.stateView.model?.model.value = newState
-//            self?.performActionFor(state: newState)
-//        }
+        resetData()
     }
     
     override func loadView() {
@@ -68,6 +68,7 @@ class MainViewController: UIViewController {
     }
     
     private func resetData() {
+        print("Data Reset")
         data1 = DataPiece()
         data2 = nil
         data3 = nil
@@ -79,11 +80,8 @@ class MainViewController: UIViewController {
             performStartedOperation()
         case .stopped:
             performStoppedOperation()
-        case .responseNeeded:
-            performResponseNeededOperation()
         case .locationError:
-            timer.invalidate()
-            print("Error")
+            stopTimer()
         }
     }
     
@@ -92,9 +90,8 @@ class MainViewController: UIViewController {
             guard let weakSelf = self else {
                 return
             }
-            weakSelf.data1 = DataPiece(location: location, time: Date())
-            print("Data 1 = \(weakSelf.data1)")
-            weakSelf.timer = Timer.scheduledTimer(timeInterval: 5, target: weakSelf, selector: #selector(weakSelf.timerTick(_:)), userInfo: nil, repeats: true)
+            weakSelf.resetData()
+            weakSelf.runTimer()
         }
         locationManager.startReceivingLocationChanges()
     }
@@ -104,23 +101,46 @@ class MainViewController: UIViewController {
             guard let weakSelf = self else {
                 return
             }
-            weakSelf.data2 = DataPiece(location: location, time: Date())
-            print()
-            print("Data 1 = \(weakSelf.data1)")
-            print("Data 2 = \(weakSelf.data2)")
+            weakSelf.data3 = DataPiece(location: location, time: Date())
+            if weakSelf.isDistanceLessThanOrEqualTo(weakSelf.MINIMUM_DISTANCE, location1: weakSelf.data3?.location, location2: weakSelf.data1?.location)
+                || weakSelf.isDistanceLessThanOrEqualTo(weakSelf.MINIMUM_DISTANCE, location1: weakSelf.data3?.location, location2: weakSelf.data2?.location) {
+                    weakSelf.data2 = weakSelf.data3
+                
+            } else {
+                weakSelf.showLocationView()
+                weakSelf.stopTimer()
+            }
         }
         locationManager.startReceivingLocationChanges()
     }
     
-    private func performStoppedOperation() {
-        print("Stopped Timer")
+    private func stopTimer() {
+        print("Timer stopped!")
         timer.invalidate()
     }
     
-    private func performResponseNeededOperation() {
-        
+    private func runTimer() {
+        print("Timer running!")
+        timer = Timer.scheduledTimer(timeInterval: TIMER_INTERVAL, target: self, selector: #selector(timerTick(_:)), userInfo: nil, repeats: true)
     }
-
+    
+    private func isDistanceLessThanOrEqualTo(_ meters: CLLocationDistance, location1: CLLocation?, location2: CLLocation?) -> Bool {
+        guard let loc1 = location1, let loc2 = location2 else {
+            return true
+        }
+        return false
+//        return loc1.distance(from: loc2) <= meters
+    }
+    
+    private func performStoppedOperation() {
+        stopTimer()
+    }
+    
+    private func changeStateTo(_ state: State) {
+        stateView.model?.model.value = state
+        performActionFor(state: state)
+    }
+    
     private func showLocationView() {
         let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
         locationChangeVC.modalPresentationStyle = .overCurrentContext
@@ -136,13 +156,35 @@ extension MainViewController: StateViewModelDelegate {
 }
 
 extension MainViewController: LocationChangeViewControllerDelegate {
+    func locationChangeControllerTimerDidElapse(_ locationChangeController: LocationChangeViewController) {
+        changeStateTo(.stopped)
+        print("Send DATA2 = \(data2?.location), \(data2?.time), TIME1 = \(data1?.time) and userID to server")
+    }
+    
     func locationChangeControllerDidTapStillWaiting(_ locationChangeController: LocationChangeViewController) {
-        print("Tapped Still Waiting")
+        data2 = data3
+        runTimer()
     }
     
     func locationChangeControllerDidTapNowMoving(_ locationChangeController: LocationChangeViewController) {
-        print("Tapped Now Working")
+        locationManager.successCallback = {[weak self] (location) in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.data3 = DataPiece(location: location, time: Date())
+            
+            guard let firstData = weakSelf.data1, let secondData = weakSelf.data3 else {
+                return
+            }
+            
+            if secondData.time.timeIntervalSince(firstData.time) < weakSelf.TIME_THRESHOLD{
+                weakSelf.resetData()
+            } else {
+                print("Send DATA3 = \(weakSelf.data3?.location), \(weakSelf.data3?.time), TIME1 = \(weakSelf.data1?.time) and userID to server")
+            }
+            weakSelf.changeStateTo(.stopped)
+        }
+        locationManager.startReceivingLocationChanges()
     }
-    
     
 }

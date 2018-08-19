@@ -11,16 +11,28 @@ import UIKit
 protocol LocationChangeViewControllerDelegate: class {
     func locationChangeControllerDidTapStillWaiting(_ locationChangeController: LocationChangeViewController)
     func locationChangeControllerDidTapNowMoving(_ locationChangeController: LocationChangeViewController)
+    func locationChangeControllerTimerDidElapse(_ locationChangeController: LocationChangeViewController)
 }
 
 class LocationChangeViewController: UIViewController {
+    private let TIMER_INTERVAL: TimeInterval = 5
     @IBOutlet weak private var locationChangeView: LocationChangeDetectedView!
     weak var delegate: LocationChangeViewControllerDelegate?
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationChangeView.alpha = 0.0
         locationChangeView.delegate = self
+        timer = Timer.scheduledTimer(withTimeInterval: TIMER_INTERVAL, repeats: false, block: {[weak self] (timer) in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.timer.invalidate()
+            weakSelf.animateViewOut(completion: {
+                weakSelf.delegate?.locationChangeControllerTimerDidElapse(weakSelf)
+            })
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -64,8 +64,6 @@ class StateView: UIView {
                     self?.applyUI(StateUISettings(switchIsOn: false,
                                                   switchText: "Wait Advisor is OFF",
                                                   messageText: "If you are currently waiting in a queue or are parked waiting for your cargo to be loaded or unloaded, please turn the switch on.", isSwitchVisible: true))
-                case .responseNeeded:
-                    return
                 case .locationError:
                     self?.applyUI(StateUISettings(switchIsOn: false,
                                                   switchText: "Wait Advisor is OFF",
