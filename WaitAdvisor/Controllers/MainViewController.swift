@@ -54,6 +54,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserDefaultsManager.shared.printContents()
         viewModel = StateViewModel(model: model)
         stateView.model = viewModel
         viewModel?.delegate = self
@@ -124,6 +125,10 @@ class MainViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: TIMER_INTERVAL, target: self, selector: #selector(timerTick(_:)), userInfo: nil, repeats: true)
     }
     
+    private func sendData(_ apiObject: APIObject) {
+        APIManager.shared.post(apiObject: apiObject)
+    }
+    
     private func isDistanceLessThanOrEqualTo(_ meters: CLLocationDistance, location1: CLLocation?, location2: CLLocation?) -> Bool {
         guard let loc1 = location1, let loc2 = location2 else {
             return true
@@ -142,10 +147,12 @@ class MainViewController: UIViewController {
     }
     
     private func showLocationView() {
-        let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
-        locationChangeVC.modalPresentationStyle = .overCurrentContext
-        locationChangeVC.delegate = self
-        present(locationChangeVC, animated: false, completion: nil)
+        DispatchQueue.main.async {[weak self] in
+            let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
+            locationChangeVC.modalPresentationStyle = .overCurrentContext
+            locationChangeVC.delegate = self
+            self?.present(locationChangeVC, animated: false, completion: nil)
+        }
     }
 }
 
@@ -158,7 +165,16 @@ extension MainViewController: StateViewModelDelegate {
 extension MainViewController: LocationChangeViewControllerDelegate {
     func locationChangeControllerTimerDidElapse(_ locationChangeController: LocationChangeViewController) {
         changeStateTo(.stopped)
-        print("Send DATA2 = \(data2?.location), \(data2?.time), TIME1 = \(data1?.time) and userID to server")
+        guard let userData2 = data2, let userData1 = data1 else {
+            print("Data is NIL!")
+            return
+        }
+        let apiObject = APIObject(latitude: userData2.location.coordinate.latitude,
+                                  longitude: userData2.location.coordinate.longitude,
+                                  time1: userData2.time,
+                                  time2: userData1.time,
+                                  userID: "My user ID 2")
+        sendData(apiObject)
     }
     
     func locationChangeControllerDidTapStillWaiting(_ locationChangeController: LocationChangeViewController) {
@@ -180,7 +196,17 @@ extension MainViewController: LocationChangeViewControllerDelegate {
             if secondData.time.timeIntervalSince(firstData.time) < weakSelf.TIME_THRESHOLD{
                 weakSelf.resetData()
             } else {
-                print("Send DATA3 = \(weakSelf.data3?.location), \(weakSelf.data3?.time), TIME1 = \(weakSelf.data1?.time) and userID to server")
+                
+                guard let weakSelf = self, let userData3 = weakSelf.data3, let userData1 = weakSelf.data1 else {
+                    print("Data is NIL!")
+                    return
+                }
+                let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
+                                          longitude: userData3.location.coordinate.longitude,
+                                          time1: userData3.time,
+                                          time2: userData1.time,
+                                          userID: "My user ID")
+                weakSelf.sendData(apiObject)
             }
             weakSelf.changeStateTo(.stopped)
         }
