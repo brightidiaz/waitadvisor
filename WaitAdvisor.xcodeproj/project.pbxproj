@@ -29,6 +29,9 @@
 		0DF5D6FD2128052200EAA77F /* LocationChangeDetectedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF5D6FC2128052200EAA77F /* LocationChangeDetectedView.xib */; };
 		0DF5D6FF2128065600EAA77F /* JLButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF5D6FE2128065600EAA77F /* JLButton.xib */; };
 		0DF5D701212806C600EAA77F /* JLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF5D700212806C600EAA77F /* JLButton.swift */; };
+		0DF6FA61212B9C7100233ACB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DF6FA60212B9C7100233ACB /* GoogleService-Info.plist */; };
+		0F87171B19C87E691232709E /* Pods_WaitAdvisor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2BDF3215FFDD33B12183D3D /* Pods_WaitAdvisor.framework */; };
+		92F808136FAEBD82FBFD462B /* Pods_WaitAdvisorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8301162C181BC8DE80828805 /* Pods_WaitAdvisorTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +71,13 @@
 		0DF5D6FC2128052200EAA77F /* LocationChangeDetectedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationChangeDetectedView.xib; sourceTree = "<group>"; };
 		0DF5D6FE2128065600EAA77F /* JLButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JLButton.xib; sourceTree = "<group>"; };
 		0DF5D700212806C600EAA77F /* JLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLButton.swift; sourceTree = "<group>"; };
+		0DF6FA60212B9C7100233ACB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1272D6BEA1625192C607F09B /* Pods-WaitAdvisor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaitAdvisor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaitAdvisor/Pods-WaitAdvisor.debug.xcconfig"; sourceTree = "<group>"; };
+		2CED886B13067DD8AC02557B /* Pods-WaitAdvisor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaitAdvisor.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaitAdvisor/Pods-WaitAdvisor.release.xcconfig"; sourceTree = "<group>"; };
+		8301162C181BC8DE80828805 /* Pods_WaitAdvisorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaitAdvisorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB00268F368E0AE7DCEE2355 /* Pods-WaitAdvisorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaitAdvisorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaitAdvisorTests/Pods-WaitAdvisorTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C2BDF3215FFDD33B12183D3D /* Pods_WaitAdvisor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaitAdvisor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C72549646D7D36E76AB663F7 /* Pods-WaitAdvisorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaitAdvisorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaitAdvisorTests/Pods-WaitAdvisorTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F87171B19C87E691232709E /* Pods_WaitAdvisor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92F808136FAEBD82FBFD462B /* Pods_WaitAdvisorTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +114,8 @@
 				0DF2FE182120371C00CC3457 /* WaitAdvisor */,
 				0DF2FE2D2120371D00CC3457 /* WaitAdvisorTests */,
 				0DF2FE172120371C00CC3457 /* Products */,
+				14F0D686370ADD6E339FAFA7 /* Pods */,
+				766999394735A62E4504C8A6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				0DF2FE252120371D00CC3457 /* Info.plist */,
+				0DF6FA60212B9C7100233ACB /* GoogleService-Info.plist */,
 				0DF2FE192120371C00CC3457 /* AppDelegate.swift */,
 				0DF5D6FA2127DAD800EAA77F /* LocationManager.swift */,
 				0DECE6F82129000F00F1E303 /* APIManager.swift */,
@@ -192,6 +207,26 @@
 			path = Operations;
 			sourceTree = "<group>";
 		};
+		14F0D686370ADD6E339FAFA7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1272D6BEA1625192C607F09B /* Pods-WaitAdvisor.debug.xcconfig */,
+				2CED886B13067DD8AC02557B /* Pods-WaitAdvisor.release.xcconfig */,
+				BB00268F368E0AE7DCEE2355 /* Pods-WaitAdvisorTests.debug.xcconfig */,
+				C72549646D7D36E76AB663F7 /* Pods-WaitAdvisorTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		766999394735A62E4504C8A6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2BDF3215FFDD33B12183D3D /* Pods_WaitAdvisor.framework */,
+				8301162C181BC8DE80828805 /* Pods_WaitAdvisorTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -199,9 +234,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0DF2FE332120371D00CC3457 /* Build configuration list for PBXNativeTarget "WaitAdvisor" */;
 			buildPhases = (
+				326D58EEA9A344BD736FF301 /* [CP] Check Pods Manifest.lock */,
 				0DF2FE122120371C00CC3457 /* Sources */,
 				0DF2FE132120371C00CC3457 /* Frameworks */,
 				0DF2FE142120371C00CC3457 /* Resources */,
+				67850EF21E957314B5205CFF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -216,6 +253,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0DF2FE362120371D00CC3457 /* Build configuration list for PBXNativeTarget "WaitAdvisorTests" */;
 			buildPhases = (
+				3124F386C22AF51E72B9A4F6 /* [CP] Check Pods Manifest.lock */,
 				0DF2FE262120371D00CC3457 /* Sources */,
 				0DF2FE272120371D00CC3457 /* Frameworks */,
 				0DF2FE282120371D00CC3457 /* Resources */,
@@ -274,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DF2FE242120371D00CC3457 /* LaunchScreen.storyboard in Resources */,
+				0DF6FA61212B9C7100233ACB /* GoogleService-Info.plist in Resources */,
 				0DF2FE212120371D00CC3457 /* Assets.xcassets in Resources */,
 				0DF5D6FD2128052200EAA77F /* LocationChangeDetectedView.xib in Resources */,
 				0DF5D6FF2128065600EAA77F /* JLButton.xib in Resources */,
@@ -291,6 +330,77 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3124F386C22AF51E72B9A4F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WaitAdvisorTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		326D58EEA9A344BD736FF301 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WaitAdvisor-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		67850EF21E957314B5205CFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WaitAdvisor/Pods-WaitAdvisor-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaitAdvisor/Pods-WaitAdvisor-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0DF2FE122120371C00CC3457 /* Sources */ = {
@@ -468,6 +578,7 @@
 		};
 		0DF2FE342120371D00CC3457 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1272D6BEA1625192C607F09B /* Pods-WaitAdvisor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -487,6 +598,7 @@
 		};
 		0DF2FE352120371D00CC3457 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CED886B13067DD8AC02557B /* Pods-WaitAdvisor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -506,6 +618,7 @@
 		};
 		0DF2FE372120371D00CC3457 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB00268F368E0AE7DCEE2355 /* Pods-WaitAdvisorTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -526,6 +639,7 @@
 		};
 		0DF2FE382120371D00CC3457 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C72549646D7D36E76AB663F7 /* Pods-WaitAdvisorTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
