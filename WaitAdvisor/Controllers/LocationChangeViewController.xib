@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="430" placeholderIntrinsicHeight="167" translatesAutoresizingMaskIntoConstraints="NO" id="C4j-lu-V2t" customClass="LocationChangeDetectedView" customModule="WaitAdvisor" customModuleProvider="target">
-                    <rect key="frame" x="54" y="5.5" width="430" height="167"/>
+                    <rect key="frame" x="54" y="125.5" width="430" height="167"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
@@ -31,10 +31,22 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="centerY" secondItem="C4j-lu-V2t" secondAttribute="centerY" constant="120" id="Dna-jC-J9B"/>
                 <constraint firstItem="C4j-lu-V2t" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="Mqf-0l-NGV"/>
+                <constraint firstItem="C4j-lu-V2t" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="ZMA-HD-TK9"/>
                 <constraint firstItem="C4j-lu-V2t" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="rDQ-rM-n75"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="ZMA-HD-TK9"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact">
+                <mask key="constraints">
+                    <exclude reference="Dna-jC-J9B"/>
+                    <include reference="ZMA-HD-TK9"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="115" y="-94"/>
         </view>
     </objects>
