@@ -28,8 +28,7 @@ class PostOperation: WaitAdvisorOperation {
         executing(true)
         
         print("POSTING  DATA = \(self.apiObjecAsJson)")
-        
-        dbRef.setValue(apiObjecAsJson) {[weak self] (error, dbRef) in
+        dbRef.childByAutoId().setValue(apiObjecAsJson) {[weak self] (error, dbRef) in
             guard let weakSelf = self else {
                 self?.executing(false)
                 self?.finish(true)

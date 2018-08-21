@@ -12,7 +12,7 @@ import CoreLocation
 
 /*
  TODO
- AppID and UserID
+ AppID
  */
 
 /* Location and time encapsulated */
@@ -53,12 +53,18 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("User ID = \(UserDefaultsManager.shared.getUserID())")
+        
         print("Pending:")
         UserDefaultsManager.shared.printContents()
         print()
         viewModel = StateViewModel(model: model)
         stateView.model = viewModel
         viewModel?.delegate = self
+        locationManager.successCallback = {[weak self] _ in
+            self?.changeUIStateTo(.stopped)
+            self?.performActionFor(state: .stopped)
+        }
         locationManager.errorCallback = {[weak self] (errorString) in
             self?.changeUIStateTo(.locationError)
             self?.performActionFor(state: .locationError)
@@ -112,7 +118,7 @@ class MainViewController: UIViewController {
                                                              longitude: userData3.location.coordinate.longitude),
                                           time1: userData3.time,
                                           time2: userData1.time,
-                                          userID: "My User ID")
+                                          userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
                 weakSelf.sendData(apiObject)
             }
         }
@@ -204,7 +210,7 @@ extension MainViewController: LocationChangeViewControllerDelegate {
                                                      longitude: userData2.location.coordinate.longitude),
                                   time1: userData2.time,
                                   time2: userData1.time,
-                                  userID: "My User ID 2")
+                                  userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
         
         sendData(apiObject)
         changeUIStateTo(.stopped)
@@ -224,7 +230,7 @@ extension MainViewController: LocationChangeViewControllerDelegate {
                                                      longitude: userData2.location.coordinate.longitude),
                                   time1: userData2.time,
                                   time2: userData1.time,
-                                  userID: "My User ID 2")
+                                  userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
 
         
         sendData(apiObject)

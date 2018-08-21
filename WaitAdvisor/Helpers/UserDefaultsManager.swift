@@ -11,6 +11,7 @@ import Foundation
 class UserDefaultsManager {
     static let shared = UserDefaultsManager()
     private let key = "com.jlee.WaitAdvisor.PendingData"
+    private let userKey = "com.jlee.WaitAdvisor.UserID"
     
     func saveAPIObject(apiObjectAsJson: String) {
         if var pendingData = UserDefaults.standard.array(forKey: key) as? [String] {
@@ -56,4 +57,15 @@ class UserDefaultsManager {
         }
     }
     
+    func setUserID(_ uuid: String) {
+        if UserDefaults.standard.string(forKey: userKey) != nil {
+            return
+        }
+        UserDefaults.standard.set(uuid, forKey: userKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getUserID() -> String? {
+        return UserDefaults.standard.string(forKey: userKey)
+    }
 }
