@@ -30,8 +30,8 @@ extension DataPiece {
 
 class MainViewController: UIViewController {
     private let MINIMUM_DISTANCE: CLLocationDistance = 500.0
-    private let TIME_THRESHOLD: TimeInterval = 15 * 60
-    private let TIMER_INTERVAL: TimeInterval = 5 * 60
+    private let TIME_THRESHOLD: TimeInterval = 3//15 * 60
+    private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
     
     private let model = StateModel(value: .stopped)
     private let stateView = StateView(frame: .zero)
@@ -108,11 +108,11 @@ class MainViewController: UIViewController {
                     print("Data is NIL!")
                     return
                 }
-                let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
-                                          longitude: userData3.location.coordinate.longitude,
+                let apiObject = APIObject(location: GeoPoint(latitude: userData3.location.coordinate.latitude,
+                                                             longitude: userData3.location.coordinate.longitude),
                                           time1: userData3.time,
                                           time2: userData1.time,
-                                          userID: "My user ID")
+                                          userID: "My User ID")
                 weakSelf.sendData(apiObject)
             }
         }
@@ -200,11 +200,12 @@ extension MainViewController: LocationChangeViewControllerDelegate {
             print("Data is NIL!")
             return
         }
-        let apiObject = APIObject(latitude: userData2.location.coordinate.latitude,
-                                  longitude: userData2.location.coordinate.longitude,
+        let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
+                                                     longitude: userData2.location.coordinate.longitude),
                                   time1: userData2.time,
                                   time2: userData1.time,
-                                  userID: "My user ID 2")
+                                  userID: "My User ID 2")
+        
         sendData(apiObject)
         changeUIStateTo(.stopped)
     }
@@ -219,11 +220,13 @@ extension MainViewController: LocationChangeViewControllerDelegate {
             print("Data is NIL!")
             return
         }
-        let apiObject = APIObject(latitude: userData2.location.coordinate.latitude,
-                                  longitude: userData2.location.coordinate.longitude,
+        let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
+                                                     longitude: userData2.location.coordinate.longitude),
                                   time1: userData2.time,
                                   time2: userData1.time,
-                                  userID: "My user ID 2")
+                                  userID: "My User ID 2")
+
+        
         sendData(apiObject)
         changeUIStateTo(.stopped)
     }
