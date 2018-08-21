@@ -7,6 +7,7 @@ target 'WaitAdvisor' do
 
   # Pods for WaitAdvisor
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
 
   target 'WaitAdvisorTests' do
     inherit! :search_paths

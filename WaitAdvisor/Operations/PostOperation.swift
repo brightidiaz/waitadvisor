@@ -7,13 +7,16 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 class PostOperation: WaitAdvisorOperation {
     var responseObject: ServerResponse?
     var apiObjecAsJson: String
+    private var dbRef: DatabaseReference
     
     init(apiObjecAsJson: String) {
         self.apiObjecAsJson = apiObjecAsJson
+        dbRef = Database.database().reference().child("user-locations")
     }
     
     override func main() {
@@ -24,11 +27,25 @@ class PostOperation: WaitAdvisorOperation {
         
         executing(true)
         
-        print("POST DATA = \(self.apiObjecAsJson)")
-        if (!isCancelled) {
-            responseObject?.response = "Server Response"
+        print("POSTING  DATA = \(self.apiObjecAsJson)")
+        
+        dbRef.setValue(apiObjecAsJson) {[weak self] (error, dbRef) in
+            guard let weakSelf = self else {
+                self?.executing(false)
+                self?.finish(true)
+                return
+            }
+            if  error != nil {
+                print("Error = \(String(describing: error?.localizedDescription))")
+                weakSelf.executing(false)
+                weakSelf.finish(true)
+                return
+            }
+            if (!weakSelf.isCancelled) {
+                weakSelf.responseObject?.response = "Server Response"
+            }
+            weakSelf.executing(false)
+            weakSelf.finish(true)
         }
-        self.executing(false)
-        self.finish(true)
     }
 }
