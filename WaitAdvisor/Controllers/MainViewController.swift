@@ -25,6 +25,7 @@ extension DataPiece {
 
 class MainViewController: UIViewController {
     private let MINIMUM_DISTANCE: CLLocationDistance = 5.0
+    private let MINIMUM_SPEED: CLLocationSpeed = 10000 //10kph
     private let TIME_THRESHOLD: TimeInterval = 3//15 * 60
     private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
     
@@ -126,16 +127,42 @@ class MainViewController: UIViewController {
             guard let weakSelf = self else {
                 return
             }
-            weakSelf.data3 = DataPiece(location: location, time: Date())
-            if weakSelf.isDistanceLessThanOrEqualTo(weakSelf.MINIMUM_DISTANCE, location1: weakSelf.data3?.location, location2: weakSelf.data1?.location)
-                || weakSelf.isDistanceLessThanOrEqualTo(weakSelf.MINIMUM_DISTANCE, location1: weakSelf.data3?.location, location2: weakSelf.data2?.location) {
-                weakSelf.data2 = weakSelf.data3
-            } else {
-                weakSelf.showLocationView()
-                weakSelf.stopLocationMonitoring()
-            }
+            weakSelf.pureDistanceCheck(currentLocation: location)
         }
         locationManager.startReceivingLocationChanges()
+    }
+    
+    private func distanceAndSpeedCheck(currentLocation: CLLocation) {
+        data3 = DataPiece(location: currentLocation, time: Date())
+        if isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data1?.location) &&
+            data3!.location.speed < MINIMUM_SPEED {
+            data1 = data3
+        } else {
+            print("Show location view")
+            guard let userData1 = data1 else {
+                print("Data is NIL!")
+                return
+            }
+            let apiObject = APIObject(location: GeoPoint(latitude: userData1.location.coordinate.latitude,
+                                                         longitude: userData1.location.coordinate.longitude),
+                                      time1: userData1.time,
+                                      time2: userData1.time,
+                                      userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
+            
+            sendData(apiObject)
+            changeUIStateTo(.stopped)
+        }
+    }
+    
+    private func pureDistanceCheck(currentLocation: CLLocation) {
+        data3 = DataPiece(location: currentLocation, time: Date())
+        if isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data1?.location)
+            || isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data2?.location) {
+            data2 = data3
+        } else {
+            showLocationView()
+            stopLocationMonitoring()
+        }
     }
     
     private func stopLocationMonitoring() {
