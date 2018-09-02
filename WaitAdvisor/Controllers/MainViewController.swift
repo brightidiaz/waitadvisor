@@ -10,11 +10,6 @@
 import UIKit
 import CoreLocation
 
-/*
- TODO
- AppID
- */
-
 /* Location and time encapsulated */
 struct DataPiece {
     var location: CLLocation
@@ -38,7 +33,6 @@ class MainViewController: UIViewController {
     private var locationManager: LocationManager
     private var viewModel: StateViewModel?
     private var data1, data2, data3: DataPiece?
-    private var timer = Timer()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         locationManager = LocationManager(successCallback: nil)
@@ -88,10 +82,10 @@ class MainViewController: UIViewController {
         case .started:
             performStartedOperation()
         case .stopped:
-            stopTimer()
+            stopLocationMonitoring()
             performStoppedOperation()
         case .locationError:
-            stopTimer()
+            stopLocationMonitoring()
         }
     }
     
@@ -109,7 +103,6 @@ class MainViewController: UIViewController {
             if secondData.time.timeIntervalSince(firstData.time) < weakSelf.TIME_THRESHOLD{
                 weakSelf.resetData()
             } else {
-                
                 guard let weakSelf = self, let userData3 = weakSelf.data3, let userData1 = weakSelf.data1 else {
                     print("Data is NIL!")
                     return
@@ -121,47 +114,38 @@ class MainViewController: UIViewController {
                                           userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
                 weakSelf.sendData(apiObject)
             }
+            weakSelf.stopLocationMonitoring()
         }
         locationManager.startReceivingLocationChanges()
     }
     
     private func performStartedOperation() {
+        resetData()
+        startLocationMonitoring()
+
         locationManager.successCallback = {[weak self] (location) in
-            guard let weakSelf = self else {
-                return
-            }
-            weakSelf.resetData()
-            weakSelf.runTimer()
-        }
-        locationManager.startReceivingLocationChanges()
-    }
-    
-    @objc func timerTick(_ timer: Timer) {
-        locationManager.successCallback = {[weak self] (location) in
+            print("Location tick")
             guard let weakSelf = self else {
                 return
             }
             weakSelf.data3 = DataPiece(location: location, time: Date())
             if weakSelf.isDistanceLessThanOrEqualTo(weakSelf.MINIMUM_DISTANCE, location1: weakSelf.data3?.location, location2: weakSelf.data1?.location)
                 || weakSelf.isDistanceLessThanOrEqualTo(weakSelf.MINIMUM_DISTANCE, location1: weakSelf.data3?.location, location2: weakSelf.data2?.location) {
-                    weakSelf.data2 = weakSelf.data3
-                
+                weakSelf.data2 = weakSelf.data3
             } else {
                 weakSelf.showLocationView()
-                weakSelf.stopTimer()
+                weakSelf.stopLocationMonitoring()
             }
         }
         locationManager.startReceivingLocationChanges()
     }
     
-    private func stopTimer() {
-        print("Timer stopped!")
-        timer.invalidate()
+    private func stopLocationMonitoring() {
+        locationManager.stopReceivingLocationChanges()
     }
     
-    private func runTimer() {
-        print("Timer running!")
-        timer = Timer.scheduledTimer(timeInterval: TIMER_INTERVAL, target: self, selector: #selector(timerTick(_:)), userInfo: nil, repeats: true)
+    private func startLocationMonitoring() {
+        locationManager.startReceivingLocationChanges()
     }
     
     private func sendData(_ apiObject: APIObject) {
@@ -172,8 +156,8 @@ class MainViewController: UIViewController {
         guard let loc1 = location1, let loc2 = location2 else {
             return true
         }
-        return false
-//        return loc1.distance(from: loc2) <= meters
+//        return false
+        return loc1.distance(from: loc2) <= meters
     }
     
     private func performStoppedOperation() {
@@ -218,7 +202,7 @@ extension MainViewController: LocationChangeViewControllerDelegate {
     
     func locationChangeControllerDidTapStillWaiting(_ locationChangeController: LocationChangeViewController) {
         data2 = data3
-        runTimer()
+        startLocationMonitoring()
     }
     
     func locationChangeControllerDidTapNowMoving(_ locationChangeController: LocationChangeViewController) {

@@ -43,6 +43,10 @@ class LocationManager: NSObject {
         coreLocationManager.desiredAccuracy = kCLLocationAccuracyBest
         coreLocationManager.startUpdatingLocation()
     }
+    
+    func stopReceivingLocationChanges() {
+        coreLocationManager.stopUpdatingLocation()
+    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -59,7 +63,7 @@ extension LocationManager: CLLocationManagerDelegate {
             return
         }
         successCallback?(lastLocation)
-        coreLocationManager.stopUpdatingLocation()
+//        coreLocationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

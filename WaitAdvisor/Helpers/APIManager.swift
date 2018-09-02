@@ -36,13 +36,18 @@ class APIManager {
             let jsonString = String(data: jsonData, encoding: .utf8)!
             let _ = try JSONDecoder().decode(APIObject.self, from: jsonData)
             
-            if reachability?.connection == .none {
-                print("No connection - Saving")
-                UserDefaultsManager.shared.saveAPIObject(apiObjectAsJson: jsonString)
-            } else {
-                print("With connection - Sending out")
-                postToServer(json: jsonString)
+            print("Reachability connection = \(reachability?.connection)")
+            
+            if let reachabilityTest = reachability {
+                if reachabilityTest.connection == .none {
+                    print("No connection - Saving")
+                    UserDefaultsManager.shared.saveAPIObject(apiObjectAsJson: jsonString)
+                } else {
+                    print("With connection - Sending out")
+                    postToServer(json: jsonString)
+                }
             }
+            
         } catch {
             print(error)
         }
