@@ -24,7 +24,7 @@ extension DataPiece {
 }
 
 class MainViewController: UIViewController {
-    private let MINIMUM_DISTANCE: CLLocationDistance = 500.0
+    private let MINIMUM_DISTANCE: CLLocationDistance = 2.0
     private let TIME_THRESHOLD: TimeInterval = 3//15 * 60
     private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
     
@@ -47,11 +47,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("User ID = \(UserDefaultsManager.shared.getUserID())")
-        
-        print("Pending:")
-        UserDefaultsManager.shared.printContents()
-        print()
+//        print("Pending:")
+//        UserDefaultsManager.shared.printContents()
+//        print()
         viewModel = StateViewModel(model: model)
         stateView.model = viewModel
         viewModel?.delegate = self
@@ -169,12 +167,25 @@ class MainViewController: UIViewController {
     }
     
     private func showLocationView() {
-        DispatchQueue.main.async {[weak self] in
-            let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
-            locationChangeVC.modalPresentationStyle = .overCurrentContext
-            locationChangeVC.delegate = self
-            self?.present(locationChangeVC, animated: false, completion: nil)
+        print("Show location view")
+        guard let userData2 = data2, let userData1 = data1 else {
+            print("Data is NIL!")
+            return
         }
+        let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
+                                                     longitude: userData2.location.coordinate.longitude),
+                                  time1: userData2.time,
+                                  time2: userData1.time,
+                                  userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
+        
+        sendData(apiObject)
+        changeUIStateTo(.stopped)
+//        DispatchQueue.main.async {[weak self] in
+//            let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
+//            locationChangeVC.modalPresentationStyle = .overCurrentContext
+//            locationChangeVC.delegate = self
+//            self?.present(locationChangeVC, animated: false, completion: nil)
+//        }
     }
 }
 
