@@ -24,7 +24,7 @@ extension DataPiece {
 }
 
 class MainViewController: UIViewController {
-    private let MINIMUM_DISTANCE: CLLocationDistance = 2.0
+    private let MINIMUM_DISTANCE: CLLocationDistance = 5.0
     private let TIME_THRESHOLD: TimeInterval = 3//15 * 60
     private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
     

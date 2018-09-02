@@ -18,7 +18,8 @@ class LocationManager: NSObject {
         super.init()
         coreLocationManager = CLLocationManager()
         coreLocationManager.delegate = self
-        coreLocationManager.requestWhenInUseAuthorization()
+        coreLocationManager.allowsBackgroundLocationUpdates = true
+        coreLocationManager.requestAlwaysAuthorization()
     }
     
     convenience init(successCallback: ((CLLocation)->())?, errorCallback: ((String)->())? = nil) {
@@ -29,7 +30,7 @@ class LocationManager: NSObject {
     
     func startReceivingLocationChanges() {
         let authorizationStatus = CLLocationManager.authorizationStatus()
-        if authorizationStatus != .authorizedWhenInUse {
+        if authorizationStatus != .authorizedAlways && authorizationStatus != .authorizedWhenInUse {
             errorCallback?("Not Authorized")
             return
         }
@@ -51,7 +52,7 @@ class LocationManager: NSObject {
 
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
+        if status == .authorizedAlways && status != .authorizedWhenInUse {
             startReceivingLocationChanges()
         } else {
             errorCallback?("Not Authorized")
