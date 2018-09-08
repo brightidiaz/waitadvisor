@@ -51,6 +51,13 @@ class StateView: UIView {
     @IBOutlet weak private var messageLabel: UILabel!
     @IBOutlet weak private var switchLabel: UILabel!
     @IBOutlet weak private var switchContainer: UIView!
+    @IBOutlet weak private var errorLabel: UILabel!
+    
+    var errorMessage = "" {
+        didSet {
+            errorLabel.text = errorMessage
+        }
+    }
     
     var model: StateViewModel? {
         didSet {

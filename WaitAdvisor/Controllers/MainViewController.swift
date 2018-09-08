@@ -24,8 +24,8 @@ extension DataPiece {
 }
 
 class MainViewController: UIViewController {
-    private let MINIMUM_DISTANCE: CLLocationDistance = 5.0
-    private let MINIMUM_SPEED: CLLocationSpeed = 10000 //10kph
+    private let MINIMUM_DISTANCE: CLLocationDistance = 300.0
+    private let MINIMUM_SPEED: CLLocationSpeed = 2.7
     private let TIME_THRESHOLD: TimeInterval = 3//15 * 60
     private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
     
@@ -60,6 +60,7 @@ class MainViewController: UIViewController {
         }
         locationManager.errorCallback = {[weak self] (errorString) in
             self?.changeUIStateTo(.locationError)
+            self?.stateView.errorMessage = errorString
             self?.performActionFor(state: .locationError)
         }
         resetData()
@@ -71,7 +72,10 @@ class MainViewController: UIViewController {
     
     private func resetData() {
         print("Data Reset")
-        data1 = DataPiece()
+        locationManager.successCallback = {[weak self] location in
+            self?.data1 = DataPiece(location: location, time: Date())
+        }
+        locationManager.startReceivingLocationChanges()
         data2 = nil
         data3 = nil
     }
@@ -94,7 +98,7 @@ class MainViewController: UIViewController {
                 return
             }
             weakSelf.data3 = DataPiece(location: location, time: Date())
-            
+
             guard let firstData = weakSelf.data1, let secondData = weakSelf.data3 else {
                 return
             }
@@ -108,8 +112,8 @@ class MainViewController: UIViewController {
                 }
                 let apiObject = APIObject(location: GeoPoint(latitude: userData3.location.coordinate.latitude,
                                                              longitude: userData3.location.coordinate.longitude),
-                                          time1: userData3.time,
-                                          time2: userData1.time,
+                                          time1: userData3.time.timeIntervalSince1970,
+                                          time2: userData1.time.timeIntervalSince1970,
                                           userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
                 weakSelf.sendData(apiObject)
             }
@@ -120,19 +124,20 @@ class MainViewController: UIViewController {
     
     private func performStartedOperation() {
         resetData()
-        startLocationMonitoring()
 
         locationManager.successCallback = {[weak self] (location) in
             print("Location tick")
             guard let weakSelf = self else {
                 return
             }
-            weakSelf.pureDistanceCheck(currentLocation: location)
+//            weakSelf.pureDistanceCheck(currentLocation: location)
+            weakSelf.distanceAndSpeedCheck(currentLocation: location)
         }
         locationManager.startReceivingLocationChanges()
     }
     
     private func distanceAndSpeedCheck(currentLocation: CLLocation) {
+        stateView.errorMessage = "Current Speed = \(currentLocation.speed)"
         data3 = DataPiece(location: currentLocation, time: Date())
         if isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data1?.location) &&
             data3!.location.speed < MINIMUM_SPEED {
@@ -145,17 +150,19 @@ class MainViewController: UIViewController {
             }
             let apiObject = APIObject(location: GeoPoint(latitude: userData1.location.coordinate.latitude,
                                                          longitude: userData1.location.coordinate.longitude),
-                                      time1: userData1.time,
-                                      time2: userData1.time,
+                                      time1: userData1.time.timeIntervalSince1970,
+                                      time2: userData1.time.timeIntervalSince1970,
                                       userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
             
             sendData(apiObject)
             changeUIStateTo(.stopped)
+            stopLocationMonitoring()
         }
     }
     
     private func pureDistanceCheck(currentLocation: CLLocation) {
         data3 = DataPiece(location: currentLocation, time: Date())
+        print("Data 1 = \(data1?.location.coordinate)")
         if isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data1?.location)
             || isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data2?.location) {
             data2 = data3
@@ -181,8 +188,9 @@ class MainViewController: UIViewController {
         guard let loc1 = location1, let loc2 = location2 else {
             return true
         }
-//        return false
-        return loc1.distance(from: loc2) <= meters
+        let distance = loc1.distance(from: loc2)
+        print("Distance = \(distance)")
+        return distance <= meters
     }
     
     private func performStoppedOperation() {
@@ -201,8 +209,8 @@ class MainViewController: UIViewController {
         }
         let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
                                                      longitude: userData2.location.coordinate.longitude),
-                                  time1: userData2.time,
-                                  time2: userData1.time,
+                                  time1: userData2.time.timeIntervalSince1970,
+                                  time2: userData1.time.timeIntervalSince1970,
                                   userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
         
         sendData(apiObject)
@@ -230,8 +238,8 @@ extension MainViewController: LocationChangeViewControllerDelegate {
         }
         let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
                                                      longitude: userData2.location.coordinate.longitude),
-                                  time1: userData2.time,
-                                  time2: userData1.time,
+                                  time1: userData2.time.timeIntervalSince1970,
+                                  time2: userData1.time.timeIntervalSince1970,
                                   userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
         
         sendData(apiObject)
@@ -250,8 +258,8 @@ extension MainViewController: LocationChangeViewControllerDelegate {
         }
         let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
                                                      longitude: userData2.location.coordinate.longitude),
-                                  time1: userData2.time,
-                                  time2: userData1.time,
+                                  time1: userData2.time.timeIntervalSince1970,
+                                  time2: userData1.time.timeIntervalSince1970,
                                   userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
 
         

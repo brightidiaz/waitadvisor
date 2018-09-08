@@ -13,8 +13,8 @@ import CoreLocation
 
 struct APIObject: Codable {
     var location: GeoPoint
-    var time1: Date
-    var time2: Date
+    var time1: TimeInterval
+    var time2: TimeInterval
     var userID: String
 }
 

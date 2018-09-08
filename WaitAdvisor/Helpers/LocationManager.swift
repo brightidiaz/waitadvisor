@@ -17,7 +17,6 @@ class LocationManager: NSObject {
     private override init() {
         super.init()
         coreLocationManager = CLLocationManager()
-        coreLocationManager.delegate = self
         coreLocationManager.allowsBackgroundLocationUpdates = true
         coreLocationManager.requestAlwaysAuthorization()
     }
@@ -41,11 +40,13 @@ class LocationManager: NSObject {
         }
         
         //Configure the service
+        coreLocationManager.delegate = self
         coreLocationManager.desiredAccuracy = kCLLocationAccuracyBest
         coreLocationManager.startUpdatingLocation()
     }
     
     func stopReceivingLocationChanges() {
+        coreLocationManager.delegate = nil
         coreLocationManager.stopUpdatingLocation()
     }
 }
@@ -69,11 +70,10 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if let error = error as? CLError, error.code == .denied {
-            errorCallback?("Not Authorized")
-            manager.stopUpdatingLocation()
+            errorCallback?("Not Authorized - \(error.localizedDescription)")
             return
         }
-        errorCallback?("Failed")
+        errorCallback?("Failed - \(error.localizedDescription)")
     }
 
 }

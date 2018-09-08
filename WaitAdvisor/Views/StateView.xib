@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina3_5" orientation="landscape">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,6 +14,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StateView" customModule="WaitAdvisor" customModuleProvider="target">
             <connections>
+                <outlet property="errorLabel" destination="2Yy-3U-YMr" id="U21-Mp-Akc"/>
                 <outlet property="messageLabel" destination="Sfk-W3-Vvb" id="PgA-PG-F6P"/>
                 <outlet property="switchContainer" destination="uZm-gd-CHa" id="Bur-YZ-ME6"/>
                 <outlet property="switchLabel" destination="yWY-bi-L0W" id="WbT-Cu-eF0"/>
@@ -29,7 +30,7 @@
                     <rect key="frame" x="0.0" y="20" width="810" height="465"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T4z-DI-saZ" userLabel="Welcome Container">
-                            <rect key="frame" x="209" y="20" width="177" height="76.5"/>
+                            <rect key="frame" x="316.5" y="80" width="177" height="76.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8y-IE-4GE">
                                     <rect key="frame" x="0.0" y="0.0" width="177" height="27.5"/>
@@ -56,17 +57,17 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UZg-Bd-Glq" userLabel="Switch Container">
-                            <rect key="frame" x="135.5" y="290.5" width="324" height="154.5"/>
+                            <rect key="frame" x="35" y="180" width="740" height="105.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfk-W3-Vvb">
-                                    <rect key="frame" x="0.0" y="0.0" width="324" height="98.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="740" height="49.5"/>
                                     <string key="text">If you are currently waiting in a queue or are parked waiting for your cargo to be loaded or unloaded, please turn the switch on.</string>
                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uZm-gd-CHa">
-                                    <rect key="frame" x="0.0" y="123.5" width="324" height="31"/>
+                                    <rect key="frame" x="0.0" y="74.5" width="740" height="31"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SxA-44-rrN">
                                             <rect key="frame" x="15" y="0.0" width="51" height="31"/>
@@ -75,7 +76,7 @@
                                             </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wait Advisor is OFF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWY-bi-L0W">
-                                            <rect key="frame" x="72" y="6" width="252" height="20.5"/>
+                                            <rect key="frame" x="72" y="6" width="668" height="20.5"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -104,16 +105,16 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n8u-wP-PXn" userLabel="Logo Container">
-                            <rect key="frame" x="466" y="116.5" width="324" height="232.5"/>
+                            <rect key="frame" x="307" y="352" width="196" height="93"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brought to you in collaboration with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOi-kU-QqK">
-                                    <rect key="frame" x="0.0" y="0.5" width="324" height="38.5"/>
+                                    <rect key="frame" x="0.0" y="0.5" width="196" height="10.5"/>
                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ATA-Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Oop-ZC-2dT">
-                                    <rect key="frame" x="0.0" y="47" width="324" height="186"/>
+                                    <rect key="frame" x="21" y="19" width="154" height="74.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Oop-ZC-2dT" secondAttribute="height" multiplier="1405:679" id="SmH-fa-0HX"/>
                                     </constraints>
@@ -152,9 +153,16 @@
                                 </mask>
                             </variation>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Yy-3U-YMr">
+                            <rect key="frame" x="20" y="293" width="770" height="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="2Yy-3U-YMr" firstAttribute="leading" secondItem="McK-hB-Yc9" secondAttribute="leading" constant="20" id="3R2-dZ-u3B"/>
                         <constraint firstItem="T4z-DI-saZ" firstAttribute="top" secondItem="McK-hB-Yc9" secondAttribute="top" constant="80" id="8CZ-R1-6tm"/>
                         <constraint firstAttribute="trailing" secondItem="n8u-wP-PXn" secondAttribute="trailing" constant="50" id="BHo-E1-hgG">
                             <variation key="heightClass=compact" constant="20"/>
@@ -173,6 +181,7 @@
                         <constraint firstItem="T4z-DI-saZ" firstAttribute="top" secondItem="McK-hB-Yc9" secondAttribute="top" constant="20" id="UQi-hO-btL"/>
                         <constraint firstItem="UZg-Bd-Glq" firstAttribute="centerY" secondItem="McK-hB-Yc9" secondAttribute="centerY" id="WNj-pq-5Wl"/>
                         <constraint firstItem="T4z-DI-saZ" firstAttribute="centerX" secondItem="McK-hB-Yc9" secondAttribute="centerX" id="ZXC-Ps-eTn"/>
+                        <constraint firstAttribute="trailing" secondItem="2Yy-3U-YMr" secondAttribute="trailing" constant="20" id="amC-4K-W9O"/>
                         <constraint firstItem="n8u-wP-PXn" firstAttribute="leading" secondItem="UZg-Bd-Glq" secondAttribute="trailing" constant="80" id="ap1-oZ-tAn"/>
                         <constraint firstItem="n8u-wP-PXn" firstAttribute="centerY" secondItem="McK-hB-Yc9" secondAttribute="centerY" id="kbR-it-JYO"/>
                         <constraint firstAttribute="bottom" secondItem="UZg-Bd-Glq" secondAttribute="bottom" constant="100" id="o5v-ra-nAQ"/>
@@ -185,14 +194,11 @@
                         <constraint firstItem="n8u-wP-PXn" firstAttribute="width" secondItem="McK-hB-Yc9" secondAttribute="width" multiplier="0.4" id="ttU-tk-Ckm"/>
                         <constraint firstItem="UZg-Bd-Glq" firstAttribute="leading" secondItem="McK-hB-Yc9" secondAttribute="leading" constant="35" id="xgy-y0-o8Q"/>
                         <constraint firstItem="n8u-wP-PXn" firstAttribute="height" secondItem="McK-hB-Yc9" secondAttribute="height" multiplier="0.2" id="z0I-8E-CX5"/>
+                        <constraint firstItem="2Yy-3U-YMr" firstAttribute="top" secondItem="yWY-bi-L0W" secondAttribute="bottom" constant="12" id="zEh-2u-JZI"/>
                         <constraint firstItem="n8u-wP-PXn" firstAttribute="height" secondItem="McK-hB-Yc9" secondAttribute="height" multiplier="0.5" id="zQ1-9j-PVy"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="JKG-Yg-tkd"/>
-                            <exclude reference="Ste-f3-HkX"/>
-                            <exclude reference="UQi-hO-btL"/>
-                            <exclude reference="t8p-HA-OJK"/>
                             <exclude reference="Lja-vJ-EDj"/>
                             <exclude reference="MJa-ff-Yh8"/>
                             <exclude reference="SJQ-sa-7al"/>
@@ -200,6 +206,10 @@
                             <exclude reference="o5v-ra-nAQ"/>
                             <exclude reference="pNX-12-Zba"/>
                             <exclude reference="sk4-Pc-bZe"/>
+                            <exclude reference="JKG-Yg-tkd"/>
+                            <exclude reference="Ste-f3-HkX"/>
+                            <exclude reference="UQi-hO-btL"/>
+                            <exclude reference="t8p-HA-OJK"/>
                             <exclude reference="BHo-E1-hgG"/>
                             <exclude reference="Ji6-fG-L1C"/>
                             <exclude reference="ap1-oZ-tAn"/>
@@ -210,12 +220,6 @@
                     </variation>
                     <variation key="heightClass=compact">
                         <mask key="constraints">
-                            <exclude reference="8CZ-R1-6tm"/>
-                            <exclude reference="JKG-Yg-tkd"/>
-                            <exclude reference="Ste-f3-HkX"/>
-                            <include reference="UQi-hO-btL"/>
-                            <exclude reference="ZXC-Ps-eTn"/>
-                            <exclude reference="t8p-HA-OJK"/>
                             <exclude reference="Lja-vJ-EDj"/>
                             <include reference="MJa-ff-Yh8"/>
                             <exclude reference="Mti-2J-00x"/>
@@ -226,6 +230,12 @@
                             <include reference="pNX-12-Zba"/>
                             <include reference="sk4-Pc-bZe"/>
                             <exclude reference="xgy-y0-o8Q"/>
+                            <exclude reference="8CZ-R1-6tm"/>
+                            <exclude reference="JKG-Yg-tkd"/>
+                            <exclude reference="Ste-f3-HkX"/>
+                            <include reference="UQi-hO-btL"/>
+                            <exclude reference="ZXC-Ps-eTn"/>
+                            <exclude reference="t8p-HA-OJK"/>
                             <include reference="BHo-E1-hgG"/>
                             <include reference="Ji6-fG-L1C"/>
                             <exclude reference="TAL-8O-YS0"/>
