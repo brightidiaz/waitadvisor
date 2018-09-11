@@ -25,7 +25,7 @@ extension DataPiece {
 
 class MainViewController: UIViewController {
     private let MINIMUM_DISTANCE: CLLocationDistance = 300.0
-    private let MINIMUM_SPEED: CLLocationSpeed = 2.7
+    private let MINIMUM_SPEED: CLLocationSpeed = 2.8
     private let TIME_THRESHOLD: TimeInterval = 3//15 * 60
     private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
     
@@ -124,8 +124,13 @@ class MainViewController: UIViewController {
     
     private func performStartedOperation() {
         resetData()
-
+        var isFirst = true
+        
         locationManager.successCallback = {[weak self] (location) in
+            if isFirst {
+                isFirst = false
+                return
+            }
             print("Location tick")
             guard let weakSelf = self else {
                 return
@@ -144,14 +149,14 @@ class MainViewController: UIViewController {
             data1 = data3
         } else {
             print("Show location view")
-            guard let userData1 = data1 else {
+            guard let userData1 = data1, let userData3 = data3 else {
                 print("Data is NIL!")
                 return
             }
             let apiObject = APIObject(location: GeoPoint(latitude: userData1.location.coordinate.latitude,
                                                          longitude: userData1.location.coordinate.longitude),
                                       time1: userData1.time.timeIntervalSince1970,
-                                      time2: userData1.time.timeIntervalSince1970,
+                                      time2: userData3.time.timeIntervalSince1970,
                                       userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
             
             sendData(apiObject)
