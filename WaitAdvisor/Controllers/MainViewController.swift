@@ -26,7 +26,7 @@ extension DataPiece {
 class MainViewController: UIViewController {
     private let MINIMUM_DISTANCE: CLLocationDistance = 300.0
     private let MINIMUM_SPEED: CLLocationSpeed = 2.8
-    private let TIME_THRESHOLD: TimeInterval = 3//15 * 60
+    private let TIME_THRESHOLD: TimeInterval = 15 * 60
     private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
     
     private let model = StateModel(value: .stopped)
@@ -70,14 +70,20 @@ class MainViewController: UIViewController {
         view = stateView
     }
     
-    private func resetData() {
+    private func resetData(completion: (()->())? = nil) {
         print("Data Reset")
+        var tick = 0
         locationManager.successCallback = {[weak self] location in
+            if tick < 1 {
+                tick += 1
+                return
+            }
             self?.data1 = DataPiece(location: location, time: Date())
+            self?.data2 = DataPiece(location: location, time: Date())
+            self?.data3 = DataPiece(location: location, time: Date())
+            completion?()
         }
         locationManager.startReceivingLocationChanges()
-        data2 = nil
-        data3 = nil
     }
     
     private func performActionFor(state: State) {
@@ -123,26 +129,27 @@ class MainViewController: UIViewController {
     }
     
     private func performStartedOperation() {
-        resetData()
-        var isFirst = true
-        
-        locationManager.successCallback = {[weak self] (location) in
-            if isFirst {
-                isFirst = false
-                return
-            }
-            print("Location tick")
+        resetData {[weak self] in
             guard let weakSelf = self else {
                 return
             }
-//            weakSelf.pureDistanceCheck(currentLocation: location)
-            weakSelf.distanceAndSpeedCheck(currentLocation: location)
+            var tickCount = 0
+            weakSelf.locationManager.successCallback = { (location) in
+                if tickCount < 1 {
+                    tickCount += 1
+                    return
+                }
+                print("Location tick")
+                //            weakSelf.pureDistanceCheck(currentLocation: location)
+                weakSelf.distanceAndSpeedCheck(currentLocation: location)
+            }
+            weakSelf.locationManager.startReceivingLocationChanges()
         }
-        locationManager.startReceivingLocationChanges()
     }
     
     private func distanceAndSpeedCheck(currentLocation: CLLocation) {
         stateView.errorMessage = "Current Speed = \(currentLocation.speed)"
+        stateView.diagnosticMessage = "Data 3 = \(data3!.location.coordinate.latitude), \(data3!.location.coordinate.longitude) \n Data 1 = \(data1!.location.coordinate.latitude), \(data1!.location.coordinate.longitude)"
         data3 = DataPiece(location: currentLocation, time: Date())
         if isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data1?.location) &&
             data3!.location.speed < MINIMUM_SPEED {
@@ -194,7 +201,7 @@ class MainViewController: UIViewController {
             return true
         }
         let distance = loc1.distance(from: loc2)
-        print("Distance = \(distance)")
+        stateView.diagnosticMessage += "\nDistance = \(distance)"
         return distance <= meters
     }
     

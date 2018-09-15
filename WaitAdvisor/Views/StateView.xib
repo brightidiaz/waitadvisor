@@ -14,6 +14,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StateView" customModule="WaitAdvisor" customModuleProvider="target">
             <connections>
+                <outlet property="diagnosticLabel" destination="pyY-Ju-FDK" id="b6N-Fd-SLV"/>
                 <outlet property="errorLabel" destination="2Yy-3U-YMr" id="U21-Mp-Akc"/>
                 <outlet property="messageLabel" destination="Sfk-W3-Vvb" id="PgA-PG-F6P"/>
                 <outlet property="switchContainer" destination="uZm-gd-CHa" id="Bur-YZ-ME6"/>
@@ -159,6 +160,12 @@
                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyY-Ju-FDK">
+                            <rect key="frame" x="20" y="313" width="770" height="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -183,7 +190,10 @@
                         <constraint firstItem="T4z-DI-saZ" firstAttribute="centerX" secondItem="McK-hB-Yc9" secondAttribute="centerX" id="ZXC-Ps-eTn"/>
                         <constraint firstAttribute="trailing" secondItem="2Yy-3U-YMr" secondAttribute="trailing" constant="20" id="amC-4K-W9O"/>
                         <constraint firstItem="n8u-wP-PXn" firstAttribute="leading" secondItem="UZg-Bd-Glq" secondAttribute="trailing" constant="80" id="ap1-oZ-tAn"/>
+                        <constraint firstItem="pyY-Ju-FDK" firstAttribute="leading" secondItem="2Yy-3U-YMr" secondAttribute="leading" id="dDC-cb-Qvi"/>
+                        <constraint firstItem="pyY-Ju-FDK" firstAttribute="trailing" secondItem="2Yy-3U-YMr" secondAttribute="trailing" id="iRK-nN-9uz"/>
                         <constraint firstItem="n8u-wP-PXn" firstAttribute="centerY" secondItem="McK-hB-Yc9" secondAttribute="centerY" id="kbR-it-JYO"/>
+                        <constraint firstItem="pyY-Ju-FDK" firstAttribute="top" secondItem="2Yy-3U-YMr" secondAttribute="bottom" constant="8" id="mkA-JC-Zna"/>
                         <constraint firstAttribute="bottom" secondItem="UZg-Bd-Glq" secondAttribute="bottom" constant="100" id="o5v-ra-nAQ"/>
                         <constraint firstItem="UZg-Bd-Glq" firstAttribute="width" secondItem="McK-hB-Yc9" secondAttribute="width" multiplier="0.4" id="pNX-12-Zba"/>
                         <constraint firstAttribute="bottom" secondItem="UZg-Bd-Glq" secondAttribute="bottom" priority="750" constant="20" id="sk4-Pc-bZe"/>
