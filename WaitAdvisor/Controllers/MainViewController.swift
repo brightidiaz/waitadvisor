@@ -24,7 +24,7 @@ extension DataPiece {
 }
 
 class MainViewController: UIViewController {
-    private let MINIMUM_DISTANCE: CLLocationDistance = 300.0
+    private let MINIMUM_DISTANCE: CLLocationDistance = 500.0
     private let MINIMUM_SPEED: CLLocationSpeed = 2.8
     private let TIME_THRESHOLD: TimeInterval = 15 * 60
     private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
@@ -153,22 +153,48 @@ class MainViewController: UIViewController {
         data3 = DataPiece(location: currentLocation, time: Date())
         if isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data1?.location) &&
             data3!.location.speed < MINIMUM_SPEED {
-            data1 = data3
+//            data1 = data3
         } else {
-            print("Show location view")
-            guard let userData1 = data1, let userData3 = data3 else {
-                print("Data is NIL!")
-                return
-            }
-            let apiObject = APIObject(location: GeoPoint(latitude: userData1.location.coordinate.latitude,
-                                                         longitude: userData1.location.coordinate.longitude),
-                                      time1: userData1.time.timeIntervalSince1970,
-                                      time2: userData3.time.timeIntervalSince1970,
-                                      userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
             
-            sendData(apiObject)
-            changeUIStateTo(.stopped)
-            stopLocationMonitoring()
+            if UIApplication.shared.applicationState == .active {
+                stopLocationMonitoring()
+                DispatchQueue.main.async {[weak self] in
+                    let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
+                    locationChangeVC.modalPresentationStyle = .overCurrentContext
+                    locationChangeVC.delegate = self
+                    self?.present(locationChangeVC, animated: false, completion: nil)
+                }
+            } else {
+                print("App is in the background. Attempting to send data")
+                guard let userData1 = data1, let userData3 = data3 else {
+                    print("Data is NIL!")
+                    return
+                }
+                let apiObject = APIObject(location: GeoPoint(latitude: userData1.location.coordinate.latitude,
+                                                             longitude: userData1.location.coordinate.longitude),
+                                          time1: userData1.time.timeIntervalSince1970,
+                                          time2: userData3.time.timeIntervalSince1970,
+                                          userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
+
+                sendData(apiObject)
+                changeUIStateTo(.stopped)
+                stopLocationMonitoring()
+            }
+            
+            
+//            guard let userData1 = data1, let userData3 = data3 else {
+//                print("Data is NIL!")
+//                return
+//            }
+//            let apiObject = APIObject(location: GeoPoint(latitude: userData1.location.coordinate.latitude,
+//                                                         longitude: userData1.location.coordinate.longitude),
+//                                      time1: userData1.time.timeIntervalSince1970,
+//                                      time2: userData3.time.timeIntervalSince1970,
+//                                      userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
+//
+//            sendData(apiObject)
+//            changeUIStateTo(.stopped)
+//            stopLocationMonitoring()
         }
     }
     
@@ -214,25 +240,30 @@ class MainViewController: UIViewController {
     }
     
     private func showLocationView() {
-        print("Show location view")
-        guard let userData2 = data2, let userData1 = data1 else {
-            print("Data is NIL!")
-            return
+        if UIApplication.shared.applicationState == .active {
+            DispatchQueue.main.async {[weak self] in
+                let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
+                locationChangeVC.modalPresentationStyle = .overCurrentContext
+                locationChangeVC.delegate = self
+                self?.present(locationChangeVC, animated: false, completion: nil)
+            }
+        } else {
+            print("Backgrounded. Attempting to send data")
+            guard let userData2 = data2, let userData1 = data1 else {
+                print("Data is NIL!")
+                return
+            }
+            let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
+                                                         longitude: userData2.location.coordinate.longitude),
+                                      time1: userData2.time.timeIntervalSince1970,
+                                      time2: userData1.time.timeIntervalSince1970,
+                                      userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
+            
+            sendData(apiObject)
+            changeUIStateTo(.stopped)
         }
-        let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
-                                                     longitude: userData2.location.coordinate.longitude),
-                                  time1: userData2.time.timeIntervalSince1970,
-                                  time2: userData1.time.timeIntervalSince1970,
-                                  userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
         
-        sendData(apiObject)
-        changeUIStateTo(.stopped)
-//        DispatchQueue.main.async {[weak self] in
-//            let locationChangeVC = LocationChangeViewController(nibName: String(describing: LocationChangeViewController.self), bundle: .main)
-//            locationChangeVC.modalPresentationStyle = .overCurrentContext
-//            locationChangeVC.delegate = self
-//            self?.present(locationChangeVC, animated: false, completion: nil)
-//        }
+        
     }
 }
 
@@ -244,39 +275,70 @@ extension MainViewController: StateViewModelDelegate {
 
 extension MainViewController: LocationChangeViewControllerDelegate {
     func locationChangeControllerTimerDidElapse(_ locationChangeController: LocationChangeViewController) {
-        guard let userData2 = data2, let userData1 = data1 else {
+        guard let userData1 = data1, let userData3 = data3 else {
             print("Data is NIL!")
             return
         }
-        let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
-                                                     longitude: userData2.location.coordinate.longitude),
-                                  time1: userData2.time.timeIntervalSince1970,
-                                  time2: userData1.time.timeIntervalSince1970,
+        let apiObject = APIObject(location: GeoPoint(latitude: userData1.location.coordinate.latitude,
+                                                     longitude: userData1.location.coordinate.longitude),
+                                  time1: userData1.time.timeIntervalSince1970,
+                                  time2: userData3.time.timeIntervalSince1970,
                                   userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
         
         sendData(apiObject)
         changeUIStateTo(.stopped)
+        stopLocationMonitoring()
+        
+        
+//        guard let userData2 = data2, let userData1 = data1 else {
+//            print("Data is NIL!")
+//            return
+//        }
+//        let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
+//                                                     longitude: userData2.location.coordinate.longitude),
+//                                  time1: userData2.time.timeIntervalSince1970,
+//                                  time2: userData1.time.timeIntervalSince1970,
+//                                  userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
+//
+//        sendData(apiObject)
+//        changeUIStateTo(.stopped)
     }
     
     func locationChangeControllerDidTapStillWaiting(_ locationChangeController: LocationChangeViewController) {
-        data2 = data3
+        data1 = data3
         startLocationMonitoring()
+//        data2 = data3
+//        startLocationMonitoring()
     }
     
     func locationChangeControllerDidTapNowMoving(_ locationChangeController: LocationChangeViewController) {
-        guard let userData2 = data2, let userData1 = data1 else {
+        guard let userData1 = data1, let userData3 = data3 else {
             print("Data is NIL!")
             return
         }
-        let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
-                                                     longitude: userData2.location.coordinate.longitude),
-                                  time1: userData2.time.timeIntervalSince1970,
-                                  time2: userData1.time.timeIntervalSince1970,
+        let apiObject = APIObject(location: GeoPoint(latitude: userData1.location.coordinate.latitude,
+                                                     longitude: userData1.location.coordinate.longitude),
+                                  time1: userData1.time.timeIntervalSince1970,
+                                  time2: userData3.time.timeIntervalSince1970,
                                   userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
-
         
         sendData(apiObject)
         changeUIStateTo(.stopped)
+        stopLocationMonitoring()
+        
+//        guard let userData2 = data2, let userData1 = data1 else {
+//            print("Data is NIL!")
+//            return
+//        }
+//        let apiObject = APIObject(location: GeoPoint(latitude: userData2.location.coordinate.latitude,
+//                                                     longitude: userData2.location.coordinate.longitude),
+//                                  time1: userData2.time.timeIntervalSince1970,
+//                                  time2: userData1.time.timeIntervalSince1970,
+//                                  userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
+//
+//
+//        sendData(apiObject)
+//        changeUIStateTo(.stopped)
     }
     
 }

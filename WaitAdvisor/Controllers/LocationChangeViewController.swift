@@ -15,7 +15,7 @@ protocol LocationChangeViewControllerDelegate: class {
 }
 
 class LocationChangeViewController: UIViewController {
-    private let TIMER_INTERVAL: TimeInterval = 5
+    private let TIMER_INTERVAL: TimeInterval = 5 * 60
     @IBOutlet weak private var locationChangeView: LocationChangeDetectedView!
     weak var delegate: LocationChangeViewControllerDelegate?
     var timer = Timer()
