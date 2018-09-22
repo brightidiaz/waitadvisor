@@ -69,7 +69,6 @@ class MainViewController: UIViewController {
             self?.stateView.errorMessage = errorString
             self?.performActionFor(state: .locationError)
         }
-        resetData()
     }
     
     override func loadView() {
