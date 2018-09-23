@@ -35,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func applicationDidBecomeActive(_ application: UIApplication) {
         //get user id
-        UserDefaultsManager.shared.setUserID(UUID().uuidString)
+//        UserDefaultsManager.shared.setUserID(UUID().uuidString)
+        let deviceID = UIDevice.current.identifierForVendor!.uuidString
+        UserDefaultsManager.shared.setUserID(deviceID)
         APIManager.shared.postAllIfNetworkAvailable()
     }
 
