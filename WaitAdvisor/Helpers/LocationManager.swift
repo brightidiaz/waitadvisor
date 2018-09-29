@@ -49,15 +49,18 @@ class LocationManager: NSObject {
     }
     
     func stopReceivingLocationChanges() {
-        coreLocationManager.delegate = nil
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+        if authorizationStatus != .notDetermined {
+            coreLocationManager.delegate = nil
+        }
         coreLocationManager.stopUpdatingLocation()
     }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedAlways && status != .authorizedWhenInUse {
-//            startReceivingLocationChanges()
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            startReceivingLocationChanges()
         } else {
             errorCallback?("Not Authorized")
         }

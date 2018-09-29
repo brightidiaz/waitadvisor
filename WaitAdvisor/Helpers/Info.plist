@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Please enable location services for Wait Advisor to log your location</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please enable location services for Wait Advisor to log your location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
