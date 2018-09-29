@@ -71,15 +71,12 @@ extension LocationManager: CLLocationManagerDelegate {
             return
         }
         successCallback?(lastLocation)
-//        coreLocationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if let error = error as? CLError, error.code == .denied {
-//            errorCallback?("Not Authorized - \(error.localizedDescription)")
             return
         }
-//        errorCallback?("Failed - \(error.localizedDescription)")
     }
 
 }
