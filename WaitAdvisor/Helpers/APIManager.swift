@@ -12,10 +12,12 @@ import Foundation
 import CoreLocation
 
 struct APIObject: Codable {
-    var location: GeoPoint
+//    var location: GeoPoint
+    var latitude: CLLocationDegrees
+    var longitude: CLLocationDegrees
     var time1: TimeInterval
     var time2: TimeInterval
-    var userID: String
+//    var userID: String
 }
 
 struct GeoPoint: Codable {
