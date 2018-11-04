@@ -15,9 +15,9 @@ struct APIObject: Codable {
 //    var location: GeoPoint
     var latitude: CLLocationDegrees
     var longitude: CLLocationDegrees
-    var time1: TimeInterval
-    var time2: TimeInterval
-//    var userID: String
+    var time_start: TimeInterval
+    var time_end: TimeInterval
+    var userID: String
 }
 
 struct GeoPoint: Codable {
@@ -37,8 +37,6 @@ class APIManager {
             let jsonData = try JSONEncoder().encode(apiObject)
             let jsonString = String(data: jsonData, encoding: .utf8)!
             let _ = try JSONDecoder().decode(APIObject.self, from: jsonData)
-            
-            print("Reachability connection = \(reachability?.connection)")
             
             if let reachabilityTest = reachability {
                 if reachabilityTest.connection == .none {

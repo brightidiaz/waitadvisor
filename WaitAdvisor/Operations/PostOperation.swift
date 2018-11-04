@@ -16,7 +16,7 @@ class PostOperation: WaitAdvisorOperation {
     
     init(apiObjecAsJson: String) {
         self.apiObjecAsJson = apiObjecAsJson
-        dbRef = Database.database().reference().child("user-locations")
+        dbRef = Database.database().reference().child("location-data")
     }
     
     override func main() {
@@ -27,7 +27,6 @@ class PostOperation: WaitAdvisorOperation {
         
         executing(true)
         
-        print("POSTING  DATA = \(self.apiObjecAsJson)")
         dbRef.childByAutoId().setValue(apiObjecAsJson) {[weak self] (error, dbRef) in
             guard let weakSelf = self else {
                 self?.executing(false)

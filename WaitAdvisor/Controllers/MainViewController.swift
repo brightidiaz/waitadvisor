@@ -31,7 +31,7 @@ enum CheckMode {
 /* Handles main logic */
 class MainViewController: UIViewController {
     private let MINIMUM_DISTANCE: CLLocationDistance = 500.0
-    private let MINIMUM_SPEED: CLLocationSpeed = 2.8
+    private let MINIMUM_SPEED: CLLocationSpeed = 4.2 //meters per second
     private let TIME_THRESHOLD: TimeInterval = 15 * 60
     private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
     
@@ -132,8 +132,9 @@ class MainViewController: UIViewController {
 //                                          userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
                 let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
                                           longitude: userData3.location.coordinate.longitude,
-                                          time1: userData3.time.timeIntervalSince1970,
-                                          time2: userData1.time.timeIntervalSince1970)
+                                          time_start: userData3.time.timeIntervalSince1970,
+                                          time_end: userData1.time.timeIntervalSince1970,
+                                          userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
 
                 
                 weakSelf.sendData(apiObject)
@@ -240,8 +241,9 @@ class MainViewController: UIViewController {
 
                 let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
                                           longitude: userData3.location.coordinate.longitude,
-                                          time1: userData1.time.timeIntervalSince1970,
-                                          time2: userData3.time.timeIntervalSince1970)
+                                          time_start: userData1.time.timeIntervalSince1970,
+                                          time_end: userData3.time.timeIntervalSince1970,
+                                          userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
                 
                 sendData(apiObject)
                 changeUIStateTo(.stopped)
@@ -252,8 +254,9 @@ class MainViewController: UIViewController {
                 }
                 let apiObject = APIObject(latitude: userData2.location.coordinate.latitude,
                                           longitude: userData2.location.coordinate.longitude,
-                                          time1: userData2.time.timeIntervalSince1970,
-                                          time2: userData1.time.timeIntervalSince1970)
+                                          time_start: userData2.time.timeIntervalSince1970,
+                                          time_end: userData1.time.timeIntervalSince1970,
+                                          userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
                 
                 sendData(apiObject)
                 changeUIStateTo(.stopped)
@@ -280,8 +283,9 @@ extension MainViewController: LocationChangeViewControllerDelegate {
             }
             let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
                                       longitude: userData3.location.coordinate.longitude,
-                                      time1: userData1.time.timeIntervalSince1970,
-                                      time2: userData3.time.timeIntervalSince1970)
+                                      time_start: userData1.time.timeIntervalSince1970,
+                                      time_end: userData3.time.timeIntervalSince1970,
+                                      userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
             
             sendData(apiObject)
             changeUIStateTo(.stopped)
@@ -292,8 +296,9 @@ extension MainViewController: LocationChangeViewControllerDelegate {
             }
             let apiObject = APIObject(latitude: userData2.location.coordinate.latitude,
                                       longitude: userData2.location.coordinate.longitude,
-                                      time1: userData2.time.timeIntervalSince1970,
-                                      time2: userData1.time.timeIntervalSince1970)
+                                      time_start: userData2.time.timeIntervalSince1970,
+                                      time_end: userData1.time.timeIntervalSince1970,
+                                      userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
 
             sendData(apiObject)
             changeUIStateTo(.stopped)
@@ -320,8 +325,9 @@ extension MainViewController: LocationChangeViewControllerDelegate {
             }
             let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
                                       longitude: userData3.location.coordinate.longitude,
-                                      time1: userData1.time.timeIntervalSince1970,
-                                      time2: userData3.time.timeIntervalSince1970)
+                                      time_start: userData1.time.timeIntervalSince1970,
+                                      time_end: userData3.time.timeIntervalSince1970,
+                                      userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
             
             sendData(apiObject)
             changeUIStateTo(.stopped)
@@ -332,8 +338,9 @@ extension MainViewController: LocationChangeViewControllerDelegate {
             }
             let apiObject = APIObject(latitude: userData2.location.coordinate.latitude,
                                       longitude: userData2.location.coordinate.longitude,
-                                      time1: userData2.time.timeIntervalSince1970,
-                                      time2: userData1.time.timeIntervalSince1970)
+                                      time_start: userData2.time.timeIntervalSince1970,
+                                      time_end: userData1.time.timeIntervalSince1970,
+                                      userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
 
 
             sendData(apiObject)
