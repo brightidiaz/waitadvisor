@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D07A1C921912B7B00AF5594 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D07A1C821912B7B00AF5594 /* GoogleService-Info.plist */; };
 		0D90184521205131007BFCBF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90184421205131007BFCBF /* UIViewExtension.swift */; };
 		0D901849212057E6007BFCBF /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D901848212057E6007BFCBF /* StateModel.swift */; };
 		0DECE6F92129000F00F1E303 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DECE6F82129000F00F1E303 /* APIManager.swift */; };
@@ -29,7 +30,6 @@
 		0DF5D6FD2128052200EAA77F /* LocationChangeDetectedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF5D6FC2128052200EAA77F /* LocationChangeDetectedView.xib */; };
 		0DF5D6FF2128065600EAA77F /* JLButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF5D6FE2128065600EAA77F /* JLButton.xib */; };
 		0DF5D701212806C600EAA77F /* JLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF5D700212806C600EAA77F /* JLButton.swift */; };
-		0DF6FA61212B9C7100233ACB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DF6FA60212B9C7100233ACB /* GoogleService-Info.plist */; };
 		0F87171B19C87E691232709E /* Pods_WaitAdvisor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2BDF3215FFDD33B12183D3D /* Pods_WaitAdvisor.framework */; };
 		92F808136FAEBD82FBFD462B /* Pods_WaitAdvisorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8301162C181BC8DE80828805 /* Pods_WaitAdvisorTests.framework */; };
 /* End PBXBuildFile section */
@@ -45,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D07A1C821912B7B00AF5594 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D90184421205131007BFCBF /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		0D901848212057E6007BFCBF /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		0DECE6F82129000F00F1E303 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		0DF5D6FC2128052200EAA77F /* LocationChangeDetectedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationChangeDetectedView.xib; sourceTree = "<group>"; };
 		0DF5D6FE2128065600EAA77F /* JLButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JLButton.xib; sourceTree = "<group>"; };
 		0DF5D700212806C600EAA77F /* JLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLButton.swift; sourceTree = "<group>"; };
-		0DF6FA60212B9C7100233ACB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1272D6BEA1625192C607F09B /* Pods-WaitAdvisor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaitAdvisor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaitAdvisor/Pods-WaitAdvisor.debug.xcconfig"; sourceTree = "<group>"; };
 		2CED886B13067DD8AC02557B /* Pods-WaitAdvisor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaitAdvisor.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaitAdvisor/Pods-WaitAdvisor.release.xcconfig"; sourceTree = "<group>"; };
 		8301162C181BC8DE80828805 /* Pods_WaitAdvisorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaitAdvisorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,7 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				0DF2FE252120371D00CC3457 /* Info.plist */,
-				0DF6FA60212B9C7100233ACB /* GoogleService-Info.plist */,
+				0D07A1C821912B7B00AF5594 /* GoogleService-Info.plist */,
 				0DF2FE192120371C00CC3457 /* AppDelegate.swift */,
 				0DF5D6FA2127DAD800EAA77F /* LocationManager.swift */,
 				0DECE6F82129000F00F1E303 /* APIManager.swift */,
@@ -317,7 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DF2FE242120371D00CC3457 /* LaunchScreen.storyboard in Resources */,
-				0DF6FA61212B9C7100233ACB /* GoogleService-Info.plist in Resources */,
+				0D07A1C921912B7B00AF5594 /* GoogleService-Info.plist in Resources */,
 				0DF2FE212120371D00CC3457 /* Assets.xcassets in Resources */,
 				0DF5D6FD2128052200EAA77F /* LocationChangeDetectedView.xib in Resources */,
 				0DF5D6FF2128065600EAA77F /* JLButton.xib in Resources */,

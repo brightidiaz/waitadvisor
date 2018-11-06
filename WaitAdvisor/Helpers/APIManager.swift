@@ -65,7 +65,7 @@ class APIManager {
     }
     
     private func postToServer(json: String) {
-        let operation = PostOperation(apiObjecAsJson: json)
+        let operation = PostOperation(apiObjectAsJson: json)
         NetworkQueue.addOperation(operation)
     }
 }
