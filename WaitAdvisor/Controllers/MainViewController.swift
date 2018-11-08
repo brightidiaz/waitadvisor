@@ -125,11 +125,6 @@ class MainViewController: UIViewController {
                 guard let weakSelf = self, let userData3 = weakSelf.data3, let userData1 = weakSelf.data1 else {
                     return
                 }
-//                let apiObject = APIObject(location: GeoPoint(latitude: userData3.location.coordinate.latitude,
-//                                                             longitude: userData3.location.coordinate.longitude),
-//                                          time1: userData3.time.timeIntervalSince1970,
-//                                          time2: userData1.time.timeIntervalSince1970,
-//                                          userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
                 let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
                                           longitude: userData3.location.coordinate.longitude,
                                           time_start: userData3.time.timeIntervalSince1970,
@@ -233,11 +228,6 @@ class MainViewController: UIViewController {
                 guard let userData1 = data1, let userData3 = data3 else {
                     return
                 }
-//                let apiObject = APIObject(location: GeoPoint(latitude: userData3.location.coordinate.latitude,
-//                                                             longitude: userData3.location.coordinate.longitude),
-//                                          time1: userData1.time.timeIntervalSince1970,
-//                                          time2: userData3.time.timeIntervalSince1970,
-//                                          userID: UserDefaultsManager.shared.getUserID() ?? "<No User ID>")
 
                 let apiObject = APIObject(latitude: userData3.location.coordinate.latitude,
                                           longitude: userData3.location.coordinate.longitude,
