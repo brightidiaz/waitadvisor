@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import HockeySDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        BITHockeyManager.shared().configure(withIdentifier: "13540a7d2d544757988634e26fe08e29")
+        // Do some additional configuration if needed here
+        BITHockeyManager.shared().start()
+        BITHockeyManager.shared().authenticator.authenticateInstallation()
+                
         FirebaseApp.configure()
         return true
     }

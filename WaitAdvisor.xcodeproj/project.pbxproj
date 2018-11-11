@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0D07A1C921912B7B00AF5594 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D07A1C821912B7B00AF5594 /* GoogleService-Info.plist */; };
+		0D12D16E219855B300821636 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D12D16C219855B300821636 /* HockeySDK.framework */; };
+		0D12D16F219855B300821636 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0D12D16D219855B300821636 /* HockeySDKResources.bundle */; };
 		0D90184521205131007BFCBF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90184421205131007BFCBF /* UIViewExtension.swift */; };
 		0D901849212057E6007BFCBF /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D901848212057E6007BFCBF /* StateModel.swift */; };
 		0DECE6F92129000F00F1E303 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DECE6F82129000F00F1E303 /* APIManager.swift */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		0D07A1C821912B7B00AF5594 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0D12D16C219855B300821636 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
+		0D12D16D219855B300821636 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = HockeySDKResources.bundle; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDKResources.bundle"; sourceTree = "<group>"; };
 		0D90184421205131007BFCBF /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		0D901848212057E6007BFCBF /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		0DECE6F82129000F00F1E303 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D12D16E219855B300821636 /* HockeySDK.framework in Frameworks */,
 				0F87171B19C87E691232709E /* Pods_WaitAdvisor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +116,8 @@
 		0DF2FE0D2120371C00CC3457 = {
 			isa = PBXGroup;
 			children = (
+				0D12D16C219855B300821636 /* HockeySDK.framework */,
+				0D12D16D219855B300821636 /* HockeySDKResources.bundle */,
 				0DF2FE182120371C00CC3457 /* WaitAdvisor */,
 				0DF2FE2D2120371D00CC3457 /* WaitAdvisorTests */,
 				0DF2FE172120371C00CC3457 /* Products */,
@@ -239,6 +246,7 @@
 				0DF2FE132120371C00CC3457 /* Frameworks */,
 				0DF2FE142120371C00CC3457 /* Resources */,
 				67850EF21E957314B5205CFF /* [CP] Embed Pods Frameworks */,
+				0D12D1672198534500821636 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -324,6 +332,7 @@
 				0DF2FE3E21203ABA00CC3457 /* StateView.xib in Resources */,
 				0DF2FE1F2120371C00CC3457 /* Main.storyboard in Resources */,
 				0DEFEB7A21283F5100A39DF2 /* LocationChangeViewController.xib in Resources */,
+				0D12D16F219855B300821636 /* HockeySDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +346,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0D12D1672198534500821636 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
 		3124F386C22AF51E72B9A4F6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -578,6 +600,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = Z5GZDZZ4KP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/WaitAdvisor/Helpers/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -597,8 +623,13 @@
 			baseConfigurationReference = 2CED886B13067DD8AC02557B /* Pods-WaitAdvisor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z5GZDZZ4KP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/WaitAdvisor/Helpers/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -606,7 +637,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnphilliplee.WaitAdvisor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ce2eea31-888d-486e-8537-4d0923a634c8";
+				PROVISIONING_PROFILE_SPECIFIER = "Wait Advisor Ad Hoc";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
