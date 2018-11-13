@@ -33,7 +33,6 @@ class MainViewController: UIViewController {
     private let MINIMUM_DISTANCE: CLLocationDistance = 500.0
     private let MINIMUM_SPEED: CLLocationSpeed = 4.2 //meters per second
     private let TIME_THRESHOLD: TimeInterval = 15 * 60
-    private let TIMER_INTERVAL: TimeInterval = 5//5 * 60
     
     private let model = StateModel(value: .stopped)
     private let stateView = StateView(frame: .zero)
