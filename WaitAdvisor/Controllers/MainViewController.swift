@@ -31,7 +31,8 @@ enum CheckMode {
 /* Handles main logic */
 class MainViewController: UIViewController {
     private let MINIMUM_DISTANCE: CLLocationDistance = 500.0
-    private let MINIMUM_SPEED: CLLocationSpeed = 4.2 //meters per second
+    private let MINIMUM_SPEED: CLLocationSpeed = 4.2 //meters per second (approx. 15kph)
+    private let STAND_ALONE_SPEED_CHECK: CLLocationSpeed = 11.1111 //meters per second (40kph)
     private let TIME_THRESHOLD: TimeInterval = 15 * 60
     
     private let model = StateModel(value: .stopped)
@@ -166,9 +167,8 @@ class MainViewController: UIViewController {
         if data3!.time.timeIntervalSince(referenceTime) < 10 {
             return
         }
-        if isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data1?.location) &&
-            data3!.location.speed < MINIMUM_SPEED {
-        } else {
+        if (!isDistanceLessThanOrEqualTo(MINIMUM_DISTANCE, location1: data3?.location, location2: data1?.location) &&
+            data3!.location.speed > MINIMUM_SPEED) || data3!.location.speed > STAND_ALONE_SPEED_CHECK {
             showLocationView()
         }
     }
