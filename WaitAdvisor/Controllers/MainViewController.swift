@@ -32,7 +32,7 @@ enum CheckMode {
 class MainViewController: UIViewController {
     private let MINIMUM_DISTANCE: CLLocationDistance = 500.0
     private let MINIMUM_SPEED: CLLocationSpeed = 4.2 //meters per second (approx. 15kph)
-    private let STAND_ALONE_SPEED_CHECK: CLLocationSpeed = 11.1111 //meters per second (40kph)
+    private let STAND_ALONE_SPEED_CHECK: CLLocationSpeed = 16.6667 //meters per second (60kph)
     private let TIME_THRESHOLD: TimeInterval = 15 * 60
     
     private let model = StateModel(value: .stopped)
