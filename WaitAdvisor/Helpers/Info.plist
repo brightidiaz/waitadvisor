@@ -17,17 +17,17 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>2</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Please enable location services for Wait Advisor to log your location</string>
+	<string>Your location will be collected to determine where you have stayed for more than 5 minutes at less than 45kph</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Please enable location services for Wait Advisor to log your location</string>
+	<string>Your location will be collected to determine where you have stayed for more than 5 minutes at less than 45kph</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Please enable location services for Wait Advisor to log your location</string>
+	<string>Your location will be collected to determine where you have stayed for more than 5 minutes at less than 45kph</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

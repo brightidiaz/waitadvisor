@@ -609,7 +609,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.johnphilliplee.WaitAdvisor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.in2teq.waitadvisor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e4467106-6cdb-4198-966b-d0c18fd889f5";
 				PROVISIONING_PROFILE_SPECIFIER = WaitAdvisor;
@@ -625,7 +625,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = Z5GZDZZ4KP;
+				DEVELOPMENT_TEAM = 299Z92R639;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -635,10 +635,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.johnphilliplee.WaitAdvisor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.in2teq.waitadvisor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ce2eea31-888d-486e-8537-4d0923a634c8";
-				PROVISIONING_PROFILE_SPECIFIER = "Wait Advisor Ad Hoc";
+				PROVISIONING_PROFILE_SPECIFIER = "Wait Advisor JP Profile";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
